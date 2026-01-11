@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   description: "Changez le mot de passe de votre compte Kodfi.",
 };
 
-export default function ResetPassword() {
-  return <div>mot de passe oublié</div>;
+export default function ResetPasswordPage() {
+  return (
+    <div>
+      <h1>Mot de passe oublié</h1>
+      <p>Fonctionnalité à venir</p>
+    </div>
+  );
 }
