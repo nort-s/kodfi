@@ -8,7 +8,7 @@ export default async function CodesPage() {
 
   // 1. Récupérer les Hotspots (pour le menu déroulant)
   const hotspots = await prisma.hotspot.findMany({
-    where: { Owner: { email: session?.user?.email } }
+    where: { Owner: { email: session?.user?.email || undefined } }
   });
 
   // 2. Récupérer les Offres (pour le menu déroulant)

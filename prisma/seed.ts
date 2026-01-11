@@ -24,6 +24,8 @@ async function main() {
     where: { email: adminEmail },
     update: {},
     create: {
+      firstname: "Admin",
+      lastname: "System",
       email: adminEmail,
       password: passwordHash,
       phone: "0166325353", // ✅ AJOUTÉ : Numéro fictif obligatoire

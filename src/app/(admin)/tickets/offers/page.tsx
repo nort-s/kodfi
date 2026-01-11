@@ -11,7 +11,7 @@ export default async function OffersPage() {
   if (!session || !session.user) { return redirect("/signin"); }
   
   const dbUser = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: session.user.email || undefined },
     select: { id: true } // On veut juste son ID
   });
   
@@ -37,7 +37,7 @@ export default async function OffersPage() {
   // 2. Récupérer les hotspots pour le menu déroulant du modal
   const hotspots = await prisma.hotspot.findMany({
     where: { 
-        Owner: { email: session?.user?.email } 
+        Owner: { email: session?.user?.email || undefined} 
     }
   });
 
