@@ -1,0 +1,328 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- ENUMS ---
+
+enum CodeStatus {
+  AVAILABLE
+  SOLD
+  USED
+  EXPIRED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum LogEvent {
+  AUTH_SUCCESS
+  AUTH_FAIL
+  LOGOUT
+  PURCHASE
+}
+
+enum Role {
+  PROVIDER
+  ADMIN
+}
+
+// --- MODELS ---
+
+model User {
+  id              String    @id @default(cuid())
+
+  email           String   @unique
+  emailVerified   DateTime?
+  password        String
+
+  firstname       String
+  lastname        String
+  phone           String    @unique
+  image           String?
+
+  bio             String?
+  country         String?
+  cityState       String?   // Ou sépare en city et state
+  postalCode      String?
+  taxId           String?
+
+  role            Role      @default(PROVIDER)
+
+  hotspots        Hotspot[]
+  
+  accounts        Account[]
+  sessions        Session[]
+  notifications   Notification[]
+  payouts         Payout[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+// --- Modèles obligatoires pour NextAuth ---
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model EndUser {
+  id        String   @id @default(cuid())
+
+  phone     String   // obligatoire
+  deviceId  String?  // empreinte navigateur ou UUID mobile
+  lastIP    String?  
+  orders    Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
+}
+
+model Hotspot {
+  id          String    @id @default(cuid())
+  ussdCode    String    @unique
+  name        String
+  location    String?
+  redirectUrl String?
+  state       String    @default("ACTIVE")
+
+  ownerId     String
+  Owner       User      @relation(fields: [ownerId], references: [id])
+
+  offers      Offer[]
+  codes       Code[]
+  orders      Order[]
+  logAccess   LogAccess[]
+  disputes    Dispute[]
+
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? // Soft Delete : Si rempli, le hotspot est archivé
+
+  @@index([ownerId])
+}
+
+model Offer {
+  id        String   @id @default(cuid())
+  
+  hotspotId String
+  // onDelete: Restrict empêche de supprimer le hotspot si des offres existent
+  Hotspot   Hotspot  @relation(fields: [hotspotId], references: [id], onDelete: Restrict)
+
+  name      String
+  price     Int
+  duration  Int       // minutes ou secondes
+
+  codes     Code[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft Delete
+}
+
+model Code {
+  id        String   @id @default(cuid())
+
+  hotspotId String
+  Hotspot   Hotspot  @relation(fields: [hotspotId], references: [id], onDelete: Restrict)
+
+  code      String   // Pas de @unique ici, car le code peut se répéter sur un autre hotspot
+  status    CodeStatus @default(AVAILABLE)
+   
+  offerId   String?  
+  Offer     Offer?   @relation(fields: [offerId], references: [id])
+
+  orderId   String?  @unique
+  Order     Order?   @relation(fields: [orderId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime? // Soft Delete (utile si import fichier erroné)
+
+  logAccess LogAccess[]
+
+  @@index([hotspotId])
+  @@index([status])
+  @@index([hotspotId, status])
+  
+  // Clé unique composée : Un code est unique SEULEMENT au sein d'un même hotspot
+  @@unique([hotspotId, code]) 
+}
+
+model Order {
+  id          String      @id @default(cuid())
+
+  endUserId   String
+  EndUser     EndUser     @relation(fields: [endUserId], references: [id])
+
+  hotspotId   String
+  Hotspot     Hotspot     @relation(fields: [hotspotId], references: [id], onDelete: Restrict) 
+
+  payments    Payment[]   // Relation One-to-Many : Une commande peut avoir plusieurs tentatives de paiement
+
+  code        Code?
+
+  status      OrderStatus @default(PENDING)
+  amount      Int
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([endUserId])
+  @@index([hotspotId])
+  @@index([status])
+}
+
+
+model Payment {
+  id            String        @id @default(cuid())
+   
+  orderId       String?    
+  Order         Order?        @relation(fields: [orderId], references: [id])
+
+  phone         String
+  amount        Int
+  provider      String        // ex: MTN, MOOV, PAYSTACK
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([phone])
+  @@index([status])
+}
+
+
+model LogAccess {
+  id        String   @id @default(cuid())
+  hotspotId String
+  Hotspot   Hotspot  @relation(fields: [hotspotId], references: [id])
+
+  phone     String?  // numéro du client final (si connu)
+
+  codeId    String?  
+  Code      Code?    @relation(fields: [codeId], references: [id])
+
+  event     LogEvent
+  meta      Json?    // Typage JSON natif (PostgreSQL)
+  createdAt DateTime @default(now())
+
+  @@index([hotspotId])
+  @@index([phone])
+  @@index([event])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  
+  title     String
+  message   String
+  type      String   @default("INFO") // INFO, WARNING, ALERT
+  isRead    Boolean  @default(false)
+  metadata  Json?    // On stockera juste { "disputeId": "..." }
+  
+  createdAt DateTime @default(now())
+}
+
+model Dispute {
+  id              String   @id @default(cuid())
+  
+  hotspotId       String
+  Hotspot         Hotspot  @relation(fields: [hotspotId], references: [id])
+  offerId         String?  // On le met optionnel pour éviter les erreurs de migration, mais on le remplira toujours.
+
+  transactionId   String   @unique // L'ID FedaPay
+  amount          Int      // Combien on doit rembourser
+  phone           String   // Qui a payé
+  
+  status          String   @default("OPEN") // OPEN (à traiter), REFUNDED (remboursé), RESOLVED (traité autrement)
+  resolutionCode  String?
+  
+  createdAt       DateTime @default(now())
+  resolvedAt      DateTime?
+}
+
+model Payout {
+  id          String   @id @default(cuid())
+  
+  amount      Int      // Montant demandé
+  phone       String   // Numéro Mobile Money
+  network     String   // MTN, MOOV, CELTIIS
+  
+  status      String   @default("PENDING") // PENDING, PROCESSED, REJECTED
+  
+  // Champs optionnels pour le suivi admin
+  reference   String?  // ID de la transaction Mobile Money quand tu as payé
+  rejectionReason String? // Pourquoi tu as refusé (ex: "Numéro invalide")
+
+  userId      String
+  User        User     @relation(fields: [userId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  processedAt DateTime?
+}
+
+model SystemConfig {
+  id                 String   @id @default("global_config")
+  minPayoutAmount    Int      @default(2000)
+  maxPayoutAmount    Int
+  commissionRate     Float    @default(10.0)
+  arePayoutsEnabled  Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
