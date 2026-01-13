@@ -81,8 +81,8 @@ export default function HotspotsTable({ data, onEdit, onDelete }: HotspotsTableP
         row.ussdCode ? (
           <div className="flex flex-col">
             <span className="inline-flex items-center px-2.5 py-1 rounded-md text-sm font-bold bg-purple-100 text-purple-800 font-mono tracking-wider">
-              {/* *323*{row.ussdCode}# */}
-              323
+              {/* *323*{row.ussdCode}# TODO: Modifier le format du code USSD une fois que la fonctionnalité est implémentee */} 
+              {row.ussdCode}
             </span>
             <span className="text-[10px] text-gray-400 mt-1">Code unique généré</span>
           </div>
