@@ -15,15 +15,24 @@ export default async function PaymentPage({ params }: { params: Promise<{ ussdCo
     // return;
 
     // 1. On récupère le Hotspot et ses Offres
+
     const hotspot = await prisma.hotspot.findUnique({
-        where: { ussdCode: resolvedParams.ussdCode },
-        include: {
-            offers: {
-                where: { deletedAt: null }, // Seulement les offres actives
-                orderBy: { price: 'asc' }   // Du moins cher au plus cher
-            }
+    where: { ussdCode: resolvedParams.ussdCode },
+    include: {
+        offers: {
+            where: { 
+                deletedAt: null, // Pas supprimée
+                codes: {
+                    some: {
+                        status: "AVAILABLE", // Au moins un code disponible
+                        deletedAt: null      // Qui n'est pas supprimé (soft delete)
+                    }
+                }
+            },
+            orderBy: { price: 'asc' }
         }
-    });
+    }
+});
 
     // console.log(hotspot);
     // return;
