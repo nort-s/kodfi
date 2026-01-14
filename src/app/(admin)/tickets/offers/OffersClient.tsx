@@ -6,6 +6,7 @@ import { Plus, Tag, Clock, Coins } from "lucide-react";
 import Button from "@/components/ui/button/Button";
 import GenericTable, { ColumnDef } from "@/components/tables/GenericTable";
 import OfferModal from "./OfferModal";
+import { formatOfferDuration } from "@/lib/utils/format";
 
 // On étend le type Offer pour inclure la relation Hotspot (pour l'affichage)
 type OfferWithHotspot = Offer & { Hotspot: Hotspot };
@@ -17,6 +18,13 @@ interface OffersClientProps {
 
 export default function OffersClient({ initialOffers, hotspots }: OffersClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const unitStyles: Record<string, string> = {
+    MINUTES: "bg-blue-50 text-blue-600 border-blue-100",
+    HOURS: "bg-green-50 text-green-600 border-green-100",
+    DAYS: "bg-purple-50 text-purple-600 border-purple-100",
+    MONTHS: "bg-yellow-50 text-yellow-600 border-yellow-100",
+  };
 
   // Définition des colonnes
   const columns: ColumnDef<OfferWithHotspot>[] = [
@@ -43,9 +51,12 @@ export default function OffersClient({ initialOffers, hotspots }: OffersClientPr
     {
       header: "Durée",
       cell: (row) => (
-        <div className="flex items-center gap-2 text-gray-600">
-          <Clock size={16} />
-          <span>{row.duration} min</span>
+        <div className="flex items-center gap-2">
+          {/* On utilise notre helper pour afficher "2 h" au lieu de "2" */}
+          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium ${unitStyles[row.unit] || "bg-gray-50"}`}>
+            <Clock size={12} />
+            <span>{formatOfferDuration(row.duration, row.unit)}</span>
+          </div>
         </div>
       ),
     },

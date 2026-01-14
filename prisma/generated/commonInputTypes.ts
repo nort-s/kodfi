@@ -190,6 +190,13 @@ export type IntFilter<$PrismaModel = never> = {
   not?: Prisma.NestedIntFilter<$PrismaModel> | number
 }
 
+export type EnumDurationUnitFilter<$PrismaModel = never> = {
+  equals?: $Enums.DurationUnit | Prisma.EnumDurationUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel> | $Enums.DurationUnit
+}
+
 export type IntWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -204,6 +211,16 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedIntFilter<$PrismaModel>
   _max?: Prisma.NestedIntFilter<$PrismaModel>
+}
+
+export type EnumDurationUnitWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DurationUnit | Prisma.EnumDurationUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDurationUnitWithAggregatesFilter<$PrismaModel> | $Enums.DurationUnit
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel>
 }
 
 export type EnumCodeStatusFilter<$PrismaModel = never> = {
@@ -543,6 +560,13 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
+export type NestedEnumDurationUnitFilter<$PrismaModel = never> = {
+  equals?: $Enums.DurationUnit | Prisma.EnumDurationUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel> | $Enums.DurationUnit
+}
+
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -568,6 +592,16 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type NestedEnumDurationUnitWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DurationUnit | Prisma.EnumDurationUnitFieldRefInput<$PrismaModel>
+  in?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DurationUnit[] | Prisma.ListEnumDurationUnitFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDurationUnitWithAggregatesFilter<$PrismaModel> | $Enums.DurationUnit
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDurationUnitFilter<$PrismaModel>
 }
 
 export type NestedEnumCodeStatusFilter<$PrismaModel = never> = {

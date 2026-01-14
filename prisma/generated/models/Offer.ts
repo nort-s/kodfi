@@ -42,6 +42,7 @@ export type OfferMinAggregateOutputType = {
   name: string | null
   price: number | null
   duration: number | null
+  unit: $Enums.DurationUnit | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -53,6 +54,7 @@ export type OfferMaxAggregateOutputType = {
   name: string | null
   price: number | null
   duration: number | null
+  unit: $Enums.DurationUnit | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -64,6 +66,7 @@ export type OfferCountAggregateOutputType = {
   name: number
   price: number
   duration: number
+  unit: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -87,6 +90,7 @@ export type OfferMinAggregateInputType = {
   name?: true
   price?: true
   duration?: true
+  unit?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -98,6 +102,7 @@ export type OfferMaxAggregateInputType = {
   name?: true
   price?: true
   duration?: true
+  unit?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -109,6 +114,7 @@ export type OfferCountAggregateInputType = {
   name?: true
   price?: true
   duration?: true
+  unit?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -207,6 +213,7 @@ export type OfferGroupByOutputType = {
   name: string
   price: number
   duration: number
+  unit: $Enums.DurationUnit
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -241,6 +248,7 @@ export type OfferWhereInput = {
   name?: Prisma.StringFilter<"Offer"> | string
   price?: Prisma.IntFilter<"Offer"> | number
   duration?: Prisma.IntFilter<"Offer"> | number
+  unit?: Prisma.EnumDurationUnitFilter<"Offer"> | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Offer"> | Date | string | null
@@ -254,6 +262,7 @@ export type OfferOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -270,6 +279,7 @@ export type OfferWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Offer"> | string
   price?: Prisma.IntFilter<"Offer"> | number
   duration?: Prisma.IntFilter<"Offer"> | number
+  unit?: Prisma.EnumDurationUnitFilter<"Offer"> | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Offer"> | Date | string | null
@@ -283,6 +293,7 @@ export type OfferOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -302,6 +313,7 @@ export type OfferScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Offer"> | string
   price?: Prisma.IntWithAggregatesFilter<"Offer"> | number
   duration?: Prisma.IntWithAggregatesFilter<"Offer"> | number
+  unit?: Prisma.EnumDurationUnitWithAggregatesFilter<"Offer"> | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Offer"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Offer"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Offer"> | Date | string | null
@@ -312,6 +324,7 @@ export type OfferCreateInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -325,6 +338,7 @@ export type OfferUncheckedCreateInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -336,6 +350,7 @@ export type OfferUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -349,6 +364,7 @@ export type OfferUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -361,6 +377,7 @@ export type OfferCreateManyInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -371,6 +388,7 @@ export type OfferUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -382,6 +400,7 @@ export type OfferUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -403,6 +422,7 @@ export type OfferCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -419,6 +439,7 @@ export type OfferMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -430,6 +451,7 @@ export type OfferMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   price?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  unit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -495,6 +517,10 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumDurationUnitFieldUpdateOperationsInput = {
+  set?: $Enums.DurationUnit
+}
+
 export type OfferCreateNestedOneWithoutCodesInput = {
   create?: Prisma.XOR<Prisma.OfferCreateWithoutCodesInput, Prisma.OfferUncheckedCreateWithoutCodesInput>
   connectOrCreate?: Prisma.OfferCreateOrConnectWithoutCodesInput
@@ -516,6 +542,7 @@ export type OfferCreateWithoutHotspotInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -527,6 +554,7 @@ export type OfferUncheckedCreateWithoutHotspotInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -568,6 +596,7 @@ export type OfferScalarWhereInput = {
   name?: Prisma.StringFilter<"Offer"> | string
   price?: Prisma.IntFilter<"Offer"> | number
   duration?: Prisma.IntFilter<"Offer"> | number
+  unit?: Prisma.EnumDurationUnitFilter<"Offer"> | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Offer"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Offer"> | Date | string | null
@@ -578,6 +607,7 @@ export type OfferCreateWithoutCodesInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -590,6 +620,7 @@ export type OfferUncheckedCreateWithoutCodesInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -616,6 +647,7 @@ export type OfferUpdateWithoutCodesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -628,6 +660,7 @@ export type OfferUncheckedUpdateWithoutCodesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -638,6 +671,7 @@ export type OfferCreateManyHotspotInput = {
   name: string
   price: number
   duration: number
+  unit?: $Enums.DurationUnit
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -648,6 +682,7 @@ export type OfferUpdateWithoutHotspotInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -659,6 +694,7 @@ export type OfferUncheckedUpdateWithoutHotspotInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -670,6 +706,7 @@ export type OfferUncheckedUpdateManyWithoutHotspotInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   duration?: Prisma.IntFieldUpdateOperationsInput | number
+  unit?: Prisma.EnumDurationUnitFieldUpdateOperationsInput | $Enums.DurationUnit
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -712,6 +749,7 @@ export type OfferSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name?: boolean
   price?: boolean
   duration?: boolean
+  unit?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -726,6 +764,7 @@ export type OfferSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   price?: boolean
   duration?: boolean
+  unit?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -738,6 +777,7 @@ export type OfferSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   price?: boolean
   duration?: boolean
+  unit?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -750,12 +790,13 @@ export type OfferSelectScalar = {
   name?: boolean
   price?: boolean
   duration?: boolean
+  unit?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type OfferOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "hotspotId" | "name" | "price" | "duration" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["offer"]>
+export type OfferOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "hotspotId" | "name" | "price" | "duration" | "unit" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["offer"]>
 export type OfferInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
   codes?: boolean | Prisma.Offer$codesArgs<ExtArgs>
@@ -780,6 +821,7 @@ export type $OfferPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     price: number
     duration: number
+    unit: $Enums.DurationUnit
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -1213,6 +1255,7 @@ export interface OfferFieldRefs {
   readonly name: Prisma.FieldRef<"Offer", 'String'>
   readonly price: Prisma.FieldRef<"Offer", 'Int'>
   readonly duration: Prisma.FieldRef<"Offer", 'Int'>
+  readonly unit: Prisma.FieldRef<"Offer", 'DurationUnit'>
   readonly createdAt: Prisma.FieldRef<"Offer", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Offer", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Offer", 'DateTime'>

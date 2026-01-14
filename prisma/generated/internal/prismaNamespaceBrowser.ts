@@ -177,6 +177,7 @@ export const OfferScalarFieldEnum = {
   name: 'name',
   price: 'price',
   duration: 'duration',
+  unit: 'unit',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

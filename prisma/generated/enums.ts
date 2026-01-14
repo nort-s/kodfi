@@ -54,3 +54,13 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const DurationUnit = {
+  MINUTES: 'MINUTES',
+  HOURS: 'HOURS',
+  DAYS: 'DAYS',
+  MONTHS: 'MONTHS'
+} as const
+
+export type DurationUnit = (typeof DurationUnit)[keyof typeof DurationUnit]
