@@ -24,7 +24,7 @@ export async function requestPayout({ amount, phone, password }: PayoutRequest) 
     }
     const network = getBeninOperator(cleanPhone); // On détecte le réseau auto
     if (network === "UNKNOWN") {
-        return { error: "Opérateur non reconnu (MTN, Moov, Celtiis uniquement)." };
+      return { error: "Opérateur non reconnu (MTN, Moov, Celtiis uniquement)." };
     }
 
     // 2. Récupérer le user
@@ -42,54 +42,61 @@ export async function requestPayout({ amount, phone, password }: PayoutRequest) 
     }
 
     // 4. CONFIG SYSTÈME
-    const config = await prisma.systemConfig.findUnique({ where: { id: "global_config" } }) 
-                   || { minPayoutAmount: 2000, arePayoutsEnabled: true, commissionRate: 10.0 };
+    const config = await prisma.systemConfig.findUnique({ where: { id: "global_config" } })
+      || { minPayoutAmount: 5000, arePayoutsEnabled: true, commissionRate: 10.0 };
 
     if (!config.arePayoutsEnabled) return { error: "Retraits suspendus temporairement." };
     if (amount < config.minPayoutAmount) return { error: `Minimum : ${config.minPayoutAmount} FCFA` };
 
     // 5. TRANSACTION ATOMIQUE
     return await prisma.$transaction(async (tx) => {
-        
-        // A. Vérifier les litiges
-        const openDisputes = await tx.dispute.count({
-            where: { Hotspot: { ownerId: user.id }, status: "OPEN" }
-        });
-        if (openDisputes > 0) throw new Error(`Vous avez ${openDisputes} litige(s) en cours. Retrait bloqué.`);
 
-        // B. Recalculer le solde
-        const sales = await tx.order.aggregate({
-            _sum: { amount: true },
-            where: { Hotspot: { ownerId: user.id }, status: "PAID" }
-        });
-        const payouts = await tx.payout.aggregate({
-            _sum: { amount: true },
-            where: { userId: user.id, status: { in: ["PENDING", "PROCESSED"] } }
-        });
+      // A. Vérifier les litiges
+      const openDisputes = await tx.dispute.count({
+        where: { Hotspot: { ownerId: user.id }, status: "OPEN" }
+      });
+      if (openDisputes > 0) throw new Error(`Vous avez ${openDisputes} litige(s) en cours. Retrait bloqué.`);
 
-        const totalRevenue = sales._sum.amount || 0;
-        const totalPayouts = payouts._sum.amount || 0;
-        // Utilisation du taux de la config dynamique au lieu de hardcoder 0.10
-        const commission = Math.floor(totalRevenue * (config.commissionRate / 100)); 
-        
-        const currentBalance = totalRevenue - totalPayouts - commission;
+      // B. Recalculer le solde
+      const netEarnings = await tx.order.aggregate({
+        _sum: { sellerPart: true }, // Utilise la colonne sellerPart du nouveau schéma
+        where: { Hotspot: { ownerId: user.id }, status: "PAID" }
+      });
 
-        if (amount > currentBalance) {
-            throw new Error(`Solde insuffisant. Disponible : ${currentBalance} FCFA`);
+      // B. Somme des retraits (on ne change rien ici)
+      const payouts = await tx.payout.aggregate({
+        _sum: { amount: true },
+        where: { userId: user.id, status: { in: ["PENDING", "PROCESSED"] } }
+      });
+
+      const earnings = netEarnings._sum.sellerPart || 0;
+      const totalPayouts = payouts._sum.amount || 0;
+
+      // Le solde est direct maintenant
+      const currentBalance = earnings - totalPayouts;
+
+      if (amount > currentBalance) {
+        throw new Error(`Solde insuffisant. Disponible : ${currentBalance} FCFA`);
+      }
+
+      let estimatedFee = 150;
+      if (amount > 10000) estimatedFee = 300;
+      if (amount > 50000) estimatedFee = 800;
+
+      // C. Créer le retrait
+      await tx.payout.create({
+        data: {
+          userId: user.id,
+          amount,         // Ce que le vendeur reçoit
+          fee: estimatedFee, // Ce que TOI tu payes à FedaPay
+          totalCost: amount + estimatedFee, // Sortie totale de ton compte FedaPay
+          phone: cleanPhone,
+          network,
+          status: "PENDING"
         }
+      });
 
-        // C. Créer le retrait
-        await tx.payout.create({
-            data: {
-                userId: user.id,
-                amount,
-                phone: cleanPhone, // On sauve le numéro propre
-                network,           // On sauve le réseau détecté
-                status: "PENDING"
-            }
-        });
-
-        return { success: true };
+      return { success: true };
     });
 
   } catch (error: any) {

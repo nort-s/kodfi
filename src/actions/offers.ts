@@ -55,7 +55,7 @@ export async function createOffer(formData: FormData) {
       },
     });
 
-    revalidatePath("/dashboard/hotspots");
+    revalidatePath("/admin/dashboard/hotspots");
     return { success: true };
   } catch (error) {
     return { error: "Erreur lors de la création de l'offre" };

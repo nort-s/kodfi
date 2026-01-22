@@ -46,7 +46,7 @@ export async function updateProfile(data: ProfileData): Promise<UpdateProfileRes
       },
     });
 
-    revalidatePath("/settings/profile");
+    revalidatePath("/admin/settings/profile");
     return { success: true };
 
   } catch (error) {

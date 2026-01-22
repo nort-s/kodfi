@@ -50,7 +50,7 @@ export async function importCodes(formData: FormData) {
       skipDuplicates: true, // Génial : ignore les doublons sans planter !
     });
 
-    revalidatePath("/dashboard/hotspots");
+    revalidatePath("/admin/dashboard/hotspots");
     return { success: true, count: result.count };
   } catch (error) {
     console.error(error);

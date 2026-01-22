@@ -207,6 +207,8 @@ export const OrderScalarFieldEnum = {
   hotspotId: 'hotspotId',
   status: 'status',
   amount: 'amount',
+  commissionAmount: 'commissionAmount',
+  sellerPart: 'sellerPart',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -275,6 +277,8 @@ export type DisputeScalarFieldEnum = (typeof DisputeScalarFieldEnum)[keyof typeo
 export const PayoutScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
+  fee: 'fee',
+  totalCost: 'totalCost',
   phone: 'phone',
   network: 'network',
   status: 'status',

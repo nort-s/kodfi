@@ -7,8 +7,9 @@ import AdminPayoutsClient from "./AdminPayoutsClient";
 export default async function SecretAdminPage() {
   const session = await getServerSession(authOptions);
   
+  console.log(session?.user?.role)
   // SÉCURITÉ : Remplace par ton email exact
-  if (session?.user?.role !== "ADMIN" || session?.user?.email !== "ton_email_admin@gmail.com") {
+  if (session?.user?.role !== "ADMIN") { // || session?.user?.email !== "ton_email_admin@gmail.com") {
       return <div>Accès Interdit. IP loggée.</div>;
   }
 

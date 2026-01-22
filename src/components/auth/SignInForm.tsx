@@ -56,7 +56,7 @@ export default function SignInForm() {
       } else {
         toast.success("Connexion réussie !");
         router.refresh(); // Rafraîchit les Server Components
-        router.push("/dashboard"); // Redirection vers le dashboard
+        router.push("/admin/dashboard"); // Redirection vers le dashboard
       }
     } catch (error) {
       toast.error("Une erreur est survenue");

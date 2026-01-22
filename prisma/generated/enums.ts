@@ -28,6 +28,24 @@ export const OrderStatus = {
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 
+export const HotspotState = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type HotspotState = (typeof HotspotState)[keyof typeof HotspotState]
+
+
+export const PayoutStatus = {
+  PENDING: 'PENDING',
+  PROCESSED: 'PROCESSED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type PayoutStatus = (typeof PayoutStatus)[keyof typeof PayoutStatus]
+
+
 export const PaymentStatus = {
   PENDING: 'PENDING',
   PAID: 'PAID',

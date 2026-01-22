@@ -1,4 +1,4 @@
-// import type { Metadata } from "next";
+import type { Metadata } from "next";
 // import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 // import React from "react";
 // import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
@@ -7,32 +7,37 @@
 // import RecentOrders from "@/components/ecommerce/RecentOrders";
 // import DemographicCard from "@/components/ecommerce/DemographicCard";
 
-// import { prisma } from "@/lib/prisma";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 // import DisputeAlert from "@/components/dashboard/DisputeAlert"; // Importe le widget
+    // import { auth } from "@/api/auth/[...nextauth]/route"
 
-// import { redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 
-// export const metadata: Metadata = {
-//   title:
-//     "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
-//   description: "This is Next.js Home for TailAdmin Dashboard Template",
-// };
+export const metadata: Metadata = {
+  title:
+    "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
+  description: "This is Next.js Home for TailAdmin Dashboard Template",
+};
 
-// export default async function Ecommerce() {
-//   const session = await getServerSession(authOptions);
+export default async function Ecommerce() {
 
-//   if (!session) {
-//     redirect('/signin')
-//   }
+//   const session = await auth()
 
-//   const user = await prisma.user.findUnique({ 
-//       where: { email: session.user.email },
-//       select: { id: true }
-//   });
+  const session = await getServerSession(authOptions);
+  // console.log(session)
 
-//   if (!user) return null;
+  if (!session || !session.user?.email) {
+    redirect('/signin')
+  }
+
+  const user = await prisma.user.findUnique({ 
+      where: { email: session.user.email },
+      select: { id: true }
+  });
+
+  if (!user) return null;
 
 //   const openDisputesCount = await prisma.dispute.count({
 //     where: {
@@ -83,4 +88,4 @@
 //     </>
     
 //   );
-// }
+}

@@ -41,7 +41,7 @@ async function main() {
       update: {},
       create: {
         id: "global_config",
-        minPayoutAmount: 2000,
+        minPayoutAmount: 5000,
         commissionRate: 10.0,
         arePayoutsEnabled: true,
       }

@@ -1,18 +1,16 @@
 "use client";
 
+import React from "react";
+
 import { useSidebar } from "@/context/SidebarContext";
+
 import AppHeader from "@/layout/AppHeader";
 import AppSidebar from "@/layout/AppSidebar";
 import Backdrop from "@/layout/Backdrop";
-import React from "react";
 
-import { NextAuthProvider } from "@/providers/NextAuthProvider";
+import { Providers } from "@/providers/providers";
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode; }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   // Dynamic class for main content margin based on sidebar state
@@ -24,20 +22,17 @@ export default function AdminLayout({
 
   return (
     <div className="min-h-screen xl:flex">
-      <NextAuthProvider>
-        {/* Sidebar and Backdrop */}
+      <Providers>
         <AppSidebar />
+
         <Backdrop />
-        {/* Main Content Area */}
-        <div
-          className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
-        >
-          {/* Header */}
+
+        <div className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}>
           <AppHeader />
-          {/* Page Content */}
+
           <div className="p-4 pb-20 mx-auto max-w-(--breakpoint-2xl) md:p-6 md:pb-24">{children}</div>
         </div>
-      </NextAuthProvider>
+      </Providers>
     </div>
   );
 }

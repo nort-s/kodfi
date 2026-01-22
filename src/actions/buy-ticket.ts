@@ -10,7 +10,6 @@ const buySchema = z.object({
 });
 
 export async function buyTicket(formData: FormData) {
-  // 1. Validation
   const rawData = {
     hotspotId: formData.get("hotspotId"),
     offerId: formData.get("offerId"),
@@ -23,53 +22,72 @@ export async function buyTicket(formData: FormData) {
   const { hotspotId, offerId, phone } = validation.data;
 
   try {
-    // 2. SIMULATION PAIEMENT (On fait semblant que ça prend 2s)
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // 3. TRANSACTION BDD (Atomique)
-    // On doit trouver un code LIBRE, le marquer VENDU, et créer la COMMANDE
-    // Le tout en une seule opération pour éviter les bugs si 2 personnes achètent en même temps.
-    
     return await prisma.$transaction(async (tx) => {
-      // a. Trouver un code disponible pour cette offre
-      const availableCode = await tx.code.findFirst({
-        where: {
-          hotspotId,
-          offerId, // Important : on veut un code qui correspond au tarif choisi
-          status: "AVAILABLE",
-        },
+      // ---------------------------------------------------------
+      // 1. RÉCUPÉRATION DES DONNÉES (Config, Offre, Hotspot)
+      // ---------------------------------------------------------
+      
+      // A. Récupérer la configuration globale
+      // On utilise l'ID par défaut défini dans ton schema
+      const config = await tx.systemConfig.findUnique({
+        where: { id: "global_config" }
       });
 
-      if (!availableCode) {
-        throw new Error("Rupture de stock pour cette offre !");
+      // Sécurité : Si la config n'a jamais été initialisée en base
+      if (!config) {
+        throw new Error("Configuration système manquante. Contactez le support.");
       }
 
-      // b. Créer ou mettre à jour le Client (EndUser)
+      // B. Récupérer l'offre (pour le PRIX)
+      const offer = await tx.offer.findUnique({ where: { id: offerId } });
+      if (!offer) throw new Error("Offre invalide ou introuvable.");
+
+      // C. Récupérer le code disponible
+      const availableCode = await tx.code.findFirst({
+        where: { hotspotId, offerId, status: "AVAILABLE" },
+      });
+
+      if (!availableCode) throw new Error("Rupture de stock pour cette offre !");
+
+      // ---------------------------------------------------------
+      // 2. CALCULS FINANCIERS (Basés sur SystemConfig)
+      // ---------------------------------------------------------
+      const amount = offer.price;
+      
+      // On utilise le taux défini dans ta table SystemConfig (ex: 10.0)
+      const commissionRate = config.commissionRate; 
+      
+      const commissionAmount = (amount * commissionRate) / 100;
+      const sellerPart = amount - commissionAmount;
+
+      // ---------------------------------------------------------
+      // 3. ENREGISTREMENT (User, Order, Update Code)
+      // ---------------------------------------------------------
+      
       let endUser = await tx.endUser.findFirst({ where: { phone } });
       if (!endUser) {
         endUser = await tx.endUser.create({ data: { phone } });
       }
 
-      // c. Créer la commande (Order)
+      // Création de la commande avec les valeurs calculées dynamiquement
       const order = await tx.order.create({
         data: {
           hotspotId,
           endUserId: endUser.id,
-          amount: 0, // Idéalement, on récupère le prix de l'offre ici
-          status: "PAID", // On considère que c'est payé
+          amount: amount,          
+          status: "PAID",
+          commissionAmount: commissionAmount, 
+          sellerPart: sellerPart,
         },
       });
 
-      // d. Marquer le code comme VENDU
       await tx.code.update({
         where: { id: availableCode.id },
-        data: {
-          status: "SOLD",
-          orderId: order.id, // On lie le code à la commande
-        },
+        data: { status: "SOLD", orderId: order.id },
       });
 
-      // 4. SUCCÈS : On renvoie le code au client
       return { success: true, code: availableCode.code };
     });
 

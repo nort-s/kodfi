@@ -28,10 +28,14 @@ export type AggregateOrder = {
 
 export type OrderAvgAggregateOutputType = {
   amount: number | null
+  commissionAmount: number | null
+  sellerPart: number | null
 }
 
 export type OrderSumAggregateOutputType = {
   amount: number | null
+  commissionAmount: number | null
+  sellerPart: number | null
 }
 
 export type OrderMinAggregateOutputType = {
@@ -40,6 +44,8 @@ export type OrderMinAggregateOutputType = {
   hotspotId: string | null
   status: $Enums.OrderStatus | null
   amount: number | null
+  commissionAmount: number | null
+  sellerPart: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +56,8 @@ export type OrderMaxAggregateOutputType = {
   hotspotId: string | null
   status: $Enums.OrderStatus | null
   amount: number | null
+  commissionAmount: number | null
+  sellerPart: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +68,8 @@ export type OrderCountAggregateOutputType = {
   hotspotId: number
   status: number
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -68,10 +78,14 @@ export type OrderCountAggregateOutputType = {
 
 export type OrderAvgAggregateInputType = {
   amount?: true
+  commissionAmount?: true
+  sellerPart?: true
 }
 
 export type OrderSumAggregateInputType = {
   amount?: true
+  commissionAmount?: true
+  sellerPart?: true
 }
 
 export type OrderMinAggregateInputType = {
@@ -80,6 +94,8 @@ export type OrderMinAggregateInputType = {
   hotspotId?: true
   status?: true
   amount?: true
+  commissionAmount?: true
+  sellerPart?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -90,6 +106,8 @@ export type OrderMaxAggregateInputType = {
   hotspotId?: true
   status?: true
   amount?: true
+  commissionAmount?: true
+  sellerPart?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +118,8 @@ export type OrderCountAggregateInputType = {
   hotspotId?: true
   status?: true
   amount?: true
+  commissionAmount?: true
+  sellerPart?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -197,6 +217,8 @@ export type OrderGroupByOutputType = {
   hotspotId: string
   status: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt: Date
   updatedAt: Date
   _count: OrderCountAggregateOutputType | null
@@ -230,6 +252,8 @@ export type OrderWhereInput = {
   hotspotId?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   amount?: Prisma.IntFilter<"Order"> | number
+  commissionAmount?: Prisma.IntFilter<"Order"> | number
+  sellerPart?: Prisma.IntFilter<"Order"> | number
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   EndUser?: Prisma.XOR<Prisma.EndUserScalarRelationFilter, Prisma.EndUserWhereInput>
@@ -244,6 +268,8 @@ export type OrderOrderByWithRelationInput = {
   hotspotId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   EndUser?: Prisma.EndUserOrderByWithRelationInput
@@ -261,6 +287,8 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   hotspotId?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   amount?: Prisma.IntFilter<"Order"> | number
+  commissionAmount?: Prisma.IntFilter<"Order"> | number
+  sellerPart?: Prisma.IntFilter<"Order"> | number
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   EndUser?: Prisma.XOR<Prisma.EndUserScalarRelationFilter, Prisma.EndUserWhereInput>
@@ -275,6 +303,8 @@ export type OrderOrderByWithAggregationInput = {
   hotspotId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
@@ -293,6 +323,8 @@ export type OrderScalarWhereWithAggregatesInput = {
   hotspotId?: Prisma.StringWithAggregatesFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
   amount?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  commissionAmount?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  sellerPart?: Prisma.IntWithAggregatesFilter<"Order"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
 }
@@ -301,6 +333,8 @@ export type OrderCreateInput = {
   id?: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   EndUser: Prisma.EndUserCreateNestedOneWithoutOrdersInput
@@ -315,6 +349,8 @@ export type OrderUncheckedCreateInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -325,6 +361,8 @@ export type OrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   EndUser?: Prisma.EndUserUpdateOneRequiredWithoutOrdersNestedInput
@@ -339,6 +377,8 @@ export type OrderUncheckedUpdateInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -351,6 +391,8 @@ export type OrderCreateManyInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -359,6 +401,8 @@ export type OrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -369,6 +413,8 @@ export type OrderUncheckedUpdateManyInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -394,12 +440,16 @@ export type OrderCountOrderByAggregateInput = {
   hotspotId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrderAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
 }
 
 export type OrderMaxOrderByAggregateInput = {
@@ -408,6 +458,8 @@ export type OrderMaxOrderByAggregateInput = {
   hotspotId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -418,12 +470,16 @@ export type OrderMinOrderByAggregateInput = {
   hotspotId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrderSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  commissionAmount?: Prisma.SortOrder
+  sellerPart?: Prisma.SortOrder
 }
 
 export type OrderCreateNestedManyWithoutEndUserInput = {
@@ -550,6 +606,8 @@ export type OrderCreateWithoutEndUserInput = {
   id?: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   Hotspot: Prisma.HotspotCreateNestedOneWithoutOrdersInput
@@ -562,6 +620,8 @@ export type OrderUncheckedCreateWithoutEndUserInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -603,6 +663,8 @@ export type OrderScalarWhereInput = {
   hotspotId?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
   amount?: Prisma.IntFilter<"Order"> | number
+  commissionAmount?: Prisma.IntFilter<"Order"> | number
+  sellerPart?: Prisma.IntFilter<"Order"> | number
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
 }
@@ -611,6 +673,8 @@ export type OrderCreateWithoutHotspotInput = {
   id?: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   EndUser: Prisma.EndUserCreateNestedOneWithoutOrdersInput
@@ -623,6 +687,8 @@ export type OrderUncheckedCreateWithoutHotspotInput = {
   endUserId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -659,6 +725,8 @@ export type OrderCreateWithoutCodeInput = {
   id?: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   EndUser: Prisma.EndUserCreateNestedOneWithoutOrdersInput
@@ -672,6 +740,8 @@ export type OrderUncheckedCreateWithoutCodeInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -697,6 +767,8 @@ export type OrderUpdateWithoutCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   EndUser?: Prisma.EndUserUpdateOneRequiredWithoutOrdersNestedInput
@@ -710,6 +782,8 @@ export type OrderUncheckedUpdateWithoutCodeInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -719,6 +793,8 @@ export type OrderCreateWithoutPaymentsInput = {
   id?: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   EndUser: Prisma.EndUserCreateNestedOneWithoutOrdersInput
@@ -732,6 +808,8 @@ export type OrderUncheckedCreateWithoutPaymentsInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
   code?: Prisma.CodeUncheckedCreateNestedOneWithoutOrderInput
@@ -757,6 +835,8 @@ export type OrderUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   EndUser?: Prisma.EndUserUpdateOneRequiredWithoutOrdersNestedInput
@@ -770,6 +850,8 @@ export type OrderUncheckedUpdateWithoutPaymentsInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   code?: Prisma.CodeUncheckedUpdateOneWithoutOrderNestedInput
@@ -780,6 +862,8 @@ export type OrderCreateManyEndUserInput = {
   hotspotId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -788,6 +872,8 @@ export type OrderUpdateWithoutEndUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Hotspot?: Prisma.HotspotUpdateOneRequiredWithoutOrdersNestedInput
@@ -800,6 +886,8 @@ export type OrderUncheckedUpdateWithoutEndUserInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -811,6 +899,8 @@ export type OrderUncheckedUpdateManyWithoutEndUserInput = {
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -820,6 +910,8 @@ export type OrderCreateManyHotspotInput = {
   endUserId: string
   status?: $Enums.OrderStatus
   amount: number
+  commissionAmount: number
+  sellerPart: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -828,6 +920,8 @@ export type OrderUpdateWithoutHotspotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   EndUser?: Prisma.EndUserUpdateOneRequiredWithoutOrdersNestedInput
@@ -840,6 +934,8 @@ export type OrderUncheckedUpdateWithoutHotspotInput = {
   endUserId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -851,6 +947,8 @@ export type OrderUncheckedUpdateManyWithoutHotspotInput = {
   endUserId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
   amount?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  sellerPart?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -892,6 +990,8 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   hotspotId?: boolean
   status?: boolean
   amount?: boolean
+  commissionAmount?: boolean
+  sellerPart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   EndUser?: boolean | Prisma.EndUserDefaultArgs<ExtArgs>
@@ -907,6 +1007,8 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   hotspotId?: boolean
   status?: boolean
   amount?: boolean
+  commissionAmount?: boolean
+  sellerPart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   EndUser?: boolean | Prisma.EndUserDefaultArgs<ExtArgs>
@@ -919,6 +1021,8 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   hotspotId?: boolean
   status?: boolean
   amount?: boolean
+  commissionAmount?: boolean
+  sellerPart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   EndUser?: boolean | Prisma.EndUserDefaultArgs<ExtArgs>
@@ -931,11 +1035,13 @@ export type OrderSelectScalar = {
   hotspotId?: boolean
   status?: boolean
   amount?: boolean
+  commissionAmount?: boolean
+  sellerPart?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "endUserId" | "hotspotId" | "status" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "endUserId" | "hotspotId" | "status" | "amount" | "commissionAmount" | "sellerPart" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   EndUser?: boolean | Prisma.EndUserDefaultArgs<ExtArgs>
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
@@ -966,6 +1072,8 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     hotspotId: string
     status: $Enums.OrderStatus
     amount: number
+    commissionAmount: number
+    sellerPart: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["order"]>
@@ -1400,6 +1508,8 @@ export interface OrderFieldRefs {
   readonly hotspotId: Prisma.FieldRef<"Order", 'String'>
   readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
   readonly amount: Prisma.FieldRef<"Order", 'Int'>
+  readonly commissionAmount: Prisma.FieldRef<"Order", 'Int'>
+  readonly sellerPart: Prisma.FieldRef<"Order", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
 }

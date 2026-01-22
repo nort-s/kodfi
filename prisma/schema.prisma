@@ -25,6 +25,18 @@ enum OrderStatus {
   FAILED
 }
 
+enum HotspotState {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSED
+  REJECTED
+}
+
 enum PaymentStatus {
   PENDING
   PAID
@@ -49,7 +61,7 @@ enum Role {
 model User {
   id              String    @id @default(cuid())
 
-  email           String   @unique
+  email           String    @unique
   emailVerified   DateTime?
   password        String
 
@@ -136,7 +148,7 @@ model Hotspot {
   name        String
   location    String?
   redirectUrl String?
-  state       String    @default("ACTIVE")
+  state       HotspotState    @default(ACTIVE)
 
   ownerId     String
   Owner       User      @relation(fields: [ownerId], references: [id])
@@ -172,7 +184,7 @@ model Offer {
   name      String
   price     Int
   duration  Int       // minutes ou secondes
-  unit       DurationUnit @default(HOURS) // L'unité choisie
+  unit      DurationUnit @default(HOURS) // L'unité choisie
 
   codes     Code[]
 
@@ -211,23 +223,26 @@ model Code {
 }
 
 model Order {
-  id          String      @id @default(cuid())
+  id                String      @id @default(cuid())
 
-  endUserId   String
-  EndUser     EndUser     @relation(fields: [endUserId], references: [id])
+  endUserId         String
+  EndUser           EndUser     @relation(fields: [endUserId], references: [id])
 
-  hotspotId   String
-  Hotspot     Hotspot     @relation(fields: [hotspotId], references: [id], onDelete: Restrict) 
+  hotspotId         String
+  Hotspot           Hotspot     @relation(fields: [hotspotId], references: [id], onDelete: Restrict) 
 
-  payments    Payment[]   // Relation One-to-Many : Une commande peut avoir plusieurs tentatives de paiement
+  payments          Payment[]   // Relation One-to-Many : Une commande peut avoir plusieurs tentatives de paiement
 
-  code        Code?
+  code              Code?
 
-  status      OrderStatus @default(PENDING)
-  amount      Int
+  status            OrderStatus @default(PENDING)
 
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  amount            Int         // Prix total payé par le client (ex: 1000)
+  commissionAmount  Int        // Ta part (ex: 100)
+  sellerPart        Int         // Sa part (ex: 900)
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
 
   @@index([endUserId])
   @@index([hotspotId])
@@ -309,11 +324,14 @@ model Dispute {
 model Payout {
   id          String   @id @default(cuid())
   
-  amount      Int      // Montant demandé
+  amount      Int      // Montant NET que le vendeur demande
+  fee         Int      @default(0) // Les frais (ex: 150) que TU payes à FedaPay
+  totalCost   Int      // amount + fee (Ce qui sort réellement de ton compte FedaPay)
+
   phone       String   // Numéro Mobile Money
   network     String   // MTN, MOOV, CELTIIS
   
-  status      String   @default("PENDING") // PENDING, PROCESSED, REJECTED
+  status      PayoutStatus   @default(PENDING) // PENDING, PROCESSED, REJECTED
   
   // Champs optionnels pour le suivi admin
   reference   String?  // ID de la transaction Mobile Money quand tu as payé

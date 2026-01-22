@@ -5,7 +5,7 @@ import { getDashboardStats } from "@/actions/get-dashboard-stats";
 // Tu auras besoin d'un chart (Recharts est super), installe-le si besoin : npm i recharts
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import WalletWidget from "@/components/dashboard/WalletWidget";
-import { EcommerceMetrics } from "@/app/(admin)/dashboard/widgets/EcommerceMetrics";
+import { EcommerceMetrics } from "@/app/admin/dashboard/widgets/EcommerceMetrics";
 
 import { getGrowthStats } from "@//actions/get-growth-stats";
 

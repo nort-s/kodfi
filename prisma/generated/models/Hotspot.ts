@@ -30,7 +30,7 @@ export type HotspotMinAggregateOutputType = {
   name: string | null
   location: string | null
   redirectUrl: string | null
-  state: string | null
+  state: $Enums.HotspotState | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,7 +43,7 @@ export type HotspotMaxAggregateOutputType = {
   name: string | null
   location: string | null
   redirectUrl: string | null
-  state: string | null
+  state: $Enums.HotspotState | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -183,7 +183,7 @@ export type HotspotGroupByOutputType = {
   name: string
   location: string | null
   redirectUrl: string | null
-  state: string
+  state: $Enums.HotspotState
   ownerId: string
   createdAt: Date
   updatedAt: Date
@@ -217,7 +217,7 @@ export type HotspotWhereInput = {
   name?: Prisma.StringFilter<"Hotspot"> | string
   location?: Prisma.StringNullableFilter<"Hotspot"> | string | null
   redirectUrl?: Prisma.StringNullableFilter<"Hotspot"> | string | null
-  state?: Prisma.StringFilter<"Hotspot"> | string
+  state?: Prisma.EnumHotspotStateFilter<"Hotspot"> | $Enums.HotspotState
   ownerId?: Prisma.StringFilter<"Hotspot"> | string
   createdAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
@@ -258,7 +258,7 @@ export type HotspotWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Hotspot"> | string
   location?: Prisma.StringNullableFilter<"Hotspot"> | string | null
   redirectUrl?: Prisma.StringNullableFilter<"Hotspot"> | string | null
-  state?: Prisma.StringFilter<"Hotspot"> | string
+  state?: Prisma.EnumHotspotStateFilter<"Hotspot"> | $Enums.HotspotState
   ownerId?: Prisma.StringFilter<"Hotspot"> | string
   createdAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
@@ -296,7 +296,7 @@ export type HotspotScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Hotspot"> | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Hotspot"> | string | null
   redirectUrl?: Prisma.StringNullableWithAggregatesFilter<"Hotspot"> | string | null
-  state?: Prisma.StringWithAggregatesFilter<"Hotspot"> | string
+  state?: Prisma.EnumHotspotStateWithAggregatesFilter<"Hotspot"> | $Enums.HotspotState
   ownerId?: Prisma.StringWithAggregatesFilter<"Hotspot"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Hotspot"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Hotspot"> | Date | string
@@ -309,7 +309,7 @@ export type HotspotCreateInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -327,7 +327,7 @@ export type HotspotUncheckedCreateInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -345,7 +345,7 @@ export type HotspotUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -363,7 +363,7 @@ export type HotspotUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,7 +381,7 @@ export type HotspotCreateManyInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -394,7 +394,7 @@ export type HotspotUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -406,7 +406,7 @@ export type HotspotUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -509,6 +509,10 @@ export type HotspotUncheckedUpdateManyWithoutOwnerNestedInput = {
   deleteMany?: Prisma.HotspotScalarWhereInput | Prisma.HotspotScalarWhereInput[]
 }
 
+export type EnumHotspotStateFieldUpdateOperationsInput = {
+  set?: $Enums.HotspotState
+}
+
 export type HotspotCreateNestedOneWithoutOffersInput = {
   create?: Prisma.XOR<Prisma.HotspotCreateWithoutOffersInput, Prisma.HotspotUncheckedCreateWithoutOffersInput>
   connectOrCreate?: Prisma.HotspotCreateOrConnectWithoutOffersInput
@@ -585,7 +589,7 @@ export type HotspotCreateWithoutOwnerInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -602,7 +606,7 @@ export type HotspotUncheckedCreateWithoutOwnerInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -648,7 +652,7 @@ export type HotspotScalarWhereInput = {
   name?: Prisma.StringFilter<"Hotspot"> | string
   location?: Prisma.StringNullableFilter<"Hotspot"> | string | null
   redirectUrl?: Prisma.StringNullableFilter<"Hotspot"> | string | null
-  state?: Prisma.StringFilter<"Hotspot"> | string
+  state?: Prisma.EnumHotspotStateFilter<"Hotspot"> | $Enums.HotspotState
   ownerId?: Prisma.StringFilter<"Hotspot"> | string
   createdAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hotspot"> | Date | string
@@ -661,7 +665,7 @@ export type HotspotCreateWithoutOffersInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -678,7 +682,7 @@ export type HotspotUncheckedCreateWithoutOffersInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -711,7 +715,7 @@ export type HotspotUpdateWithoutOffersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -728,7 +732,7 @@ export type HotspotUncheckedUpdateWithoutOffersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -745,7 +749,7 @@ export type HotspotCreateWithoutCodesInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -762,7 +766,7 @@ export type HotspotUncheckedCreateWithoutCodesInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -795,7 +799,7 @@ export type HotspotUpdateWithoutCodesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -812,7 +816,7 @@ export type HotspotUncheckedUpdateWithoutCodesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -829,7 +833,7 @@ export type HotspotCreateWithoutOrdersInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -846,7 +850,7 @@ export type HotspotUncheckedCreateWithoutOrdersInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -879,7 +883,7 @@ export type HotspotUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -896,7 +900,7 @@ export type HotspotUncheckedUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -913,7 +917,7 @@ export type HotspotCreateWithoutLogAccessInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -930,7 +934,7 @@ export type HotspotUncheckedCreateWithoutLogAccessInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -963,7 +967,7 @@ export type HotspotUpdateWithoutLogAccessInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -980,7 +984,7 @@ export type HotspotUncheckedUpdateWithoutLogAccessInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -997,7 +1001,7 @@ export type HotspotCreateWithoutDisputesInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1014,7 +1018,7 @@ export type HotspotUncheckedCreateWithoutDisputesInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1047,7 +1051,7 @@ export type HotspotUpdateWithoutDisputesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1064,7 +1068,7 @@ export type HotspotUncheckedUpdateWithoutDisputesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1081,7 +1085,7 @@ export type HotspotCreateManyOwnerInput = {
   name: string
   location?: string | null
   redirectUrl?: string | null
-  state?: string
+  state?: $Enums.HotspotState
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1093,7 +1097,7 @@ export type HotspotUpdateWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1110,7 +1114,7 @@ export type HotspotUncheckedUpdateWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1127,7 +1131,7 @@ export type HotspotUncheckedUpdateManyWithoutOwnerInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   redirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  state?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.EnumHotspotStateFieldUpdateOperationsInput | $Enums.HotspotState
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1294,7 +1298,7 @@ export type $HotspotPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     location: string | null
     redirectUrl: string | null
-    state: string
+    state: $Enums.HotspotState
     ownerId: string
     createdAt: Date
     updatedAt: Date
@@ -1733,7 +1737,7 @@ export interface HotspotFieldRefs {
   readonly name: Prisma.FieldRef<"Hotspot", 'String'>
   readonly location: Prisma.FieldRef<"Hotspot", 'String'>
   readonly redirectUrl: Prisma.FieldRef<"Hotspot", 'String'>
-  readonly state: Prisma.FieldRef<"Hotspot", 'String'>
+  readonly state: Prisma.FieldRef<"Hotspot", 'HotspotState'>
   readonly ownerId: Prisma.FieldRef<"Hotspot", 'String'>
   readonly createdAt: Prisma.FieldRef<"Hotspot", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Hotspot", 'DateTime'>

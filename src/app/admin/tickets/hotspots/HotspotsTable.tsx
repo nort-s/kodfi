@@ -65,7 +65,7 @@ export default function HotspotsTable({ data, onEdit, onDelete }: HotspotsTableP
           color={
             row.state === "ACTIVE"
               ? "success"
-              : row.state === "MAINTENANCE"
+              : row.state === "INACTIVE" || row.state === "SUSPENDED"
                 ? "warning"
                 : "error"
           }

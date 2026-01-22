@@ -1690,6 +1690,8 @@ export const OrderScalarFieldEnum = {
   hotspotId: 'hotspotId',
   status: 'status',
   amount: 'amount',
+  commissionAmount: 'commissionAmount',
+  sellerPart: 'sellerPart',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1758,6 +1760,8 @@ export type DisputeScalarFieldEnum = (typeof DisputeScalarFieldEnum)[keyof typeo
 export const PayoutScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
+  fee: 'fee',
+  totalCost: 'totalCost',
   phone: 'phone',
   network: 'network',
   status: 'status',
@@ -1887,6 +1891,20 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'HotspotState'
+ */
+export type EnumHotspotStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HotspotState'>
+    
+
+
+/**
+ * Reference to a field of type 'HotspotState[]'
+ */
+export type ListEnumHotspotStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HotspotState[]'>
+    
+
+
+/**
  * Reference to a field of type 'DurationUnit'
  */
 export type EnumDurationUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DurationUnit'>
@@ -1974,6 +1992,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'PayoutStatus'
+ */
+export type EnumPayoutStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PayoutStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PayoutStatus[]'
+ */
+export type ListEnumPayoutStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PayoutStatus[]'>
     
 
 

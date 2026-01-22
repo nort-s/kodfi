@@ -58,41 +58,45 @@ export const authOptions: NextAuthOptions = {
       // Si c'est la première connexion, on ajoute les infos de l'user au token
       if (user) {
         token.id = user.id;
-        // @ts-ignore
         token.role = user.role;
-        // @ts-ignore
         token.firstname = user.firstname;
-        // @ts-ignore
         token.lastname = user.lastname;
       }
       if (trigger === "update" && session?.user) {
         // On met à jour le token avec les données envoyées par update()
         if (session.user.firstname) token.firstname = session.user.firstname;
         if (session.user.lastname) token.lastname = session.user.lastname;
-        // @ts-ignore
         if (session.user.role) token.role = session.user.role;
       }
       return token;
     },
     async session({ session, token }) {
-      if (session.user && token) {
+      if (!token || !token.id) {
+        return session;
+      }
+
+      const freshUser = await prisma.user.findUnique({
+        where: { id: token.id as string },
+      });
+
+      if (!freshUser) {
+        session.error = "UserNotFound";
+        session.user = {} as any;
+        return session;
+      }
+
         // 👇 ICI ON LIT DEPUIS LE 'TOKEN', PAS DEPUIS 'USER'
-        session.user.id = token.id as string;
-        // @ts-ignore
-        session.user.role = token.role;
+        session.user.id = freshUser.id as string;
+        session.user.role = freshUser.role;
         
-        // @ts-ignore
-        session.user.firstname = token.firstname;
-        // @ts-ignore
-        session.user.lastname = token.lastname;
+        session.user.firstname = freshUser.firstname;
+        session.user.lastname = freshUser.lastname;
         
         // On reconstruit le nom complet proprement
-        // @ts-ignore
-        const fname = token.firstname || "";
-        // @ts-ignore
-        const lname = token.lastname || "";
+        const fname = freshUser.firstname || "";
+        const lname = freshUser.lastname || "";
         session.user.name = `${fname} ${lname}`.trim();
-      }
+      
       return session;
     },
   },

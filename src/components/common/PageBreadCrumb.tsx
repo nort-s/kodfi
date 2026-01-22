@@ -8,7 +8,7 @@ interface BreadcrumbProps {
   pageTitle: string;
 }
 
-const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ firstNode="Dashboard", firstNodeLink="/dashboard", parentNode, pageTitle }) => {
+const PageBreadcrumb: React.FC<BreadcrumbProps> = ({ firstNode="Dashboard", firstNodeLink="/admin/dashboard", parentNode, pageTitle }) => {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
       <h2
