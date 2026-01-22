@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import PayoutActions from "./PayoutActions"; // Le composant qu'on vient de créer
+import PayoutActions from "../../../(admin)/root-dashboard/payouts/PayoutActions"; // Le composant qu'on vient de créer
 import { Wallet, AlertCircle, History } from "lucide-react";
 
 export const dynamic = "force-dynamic"; // Important pour ne pas cacher les demandes
