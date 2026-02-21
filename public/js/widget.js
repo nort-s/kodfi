@@ -1,6 +1,6 @@
 (function () {
   // CONFIGURATION
-  const API_BASE_URL = "https://kodfi-jpr3l8nhj-orderic-barnors-projects.vercel.app"; // EN PROD: METS TON URL HTTPS
+  const API_BASE_URL = "https://kodfi-qrprqmplj-orderic-barnors-projects.vercel.app/"; // EN PROD: METS TON URL HTTPS
 
   const currentScript = document.currentScript;
   const ussdCode = currentScript.getAttribute("data-ussd");
