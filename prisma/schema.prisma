@@ -150,6 +150,8 @@ model Hotspot {
   redirectUrl String?
   state       HotspotState    @default(ACTIVE)
 
+  secretKey   String   @default(cuid())
+
   ownerId     String
   Owner       User      @relation(fields: [ownerId], references: [id])
 
@@ -271,22 +273,26 @@ model Payment {
 
 
 model LogAccess {
-  id        String   @id @default(cuid())
-  hotspotId String
-  Hotspot   Hotspot  @relation(fields: [hotspotId], references: [id])
+  id          String   @id @default(cuid())
+  hotspotId   String
+  Hotspot     Hotspot  @relation(fields: [hotspotId], references: [id])
 
-  phone     String?  // numéro du client final (si connu)
+  macAddress  String?
+  ipAddress   String?
+  details     String?
 
-  codeId    String?  
-  Code      Code?    @relation(fields: [codeId], references: [id])
+  phone       String?  // numéro du client final (si connu)
 
-  event     LogEvent
-  meta      Json?    // Typage JSON natif (PostgreSQL)
-  createdAt DateTime @default(now())
+  codeId      String?  
+  Code        Code?    @relation(fields: [codeId], references: [id])
+
+  action      LogEvent
+  meta        Json?    // Typage JSON natif (PostgreSQL)
+  createdAt   DateTime @default(now())
 
   @@index([hotspotId])
   @@index([phone])
-  @@index([event])
+  @@index([action])
 }
 
 model Notification {

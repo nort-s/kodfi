@@ -71,14 +71,14 @@ export default function CodesClient({ initialCodes, hotspots, offers }: CodesCli
             <p className="text-sm text-gray-500">Gérez les codes générés depuis votre routeur</p>
         </div>
         
-        <Button
+        {/* <Button
           size="md"
           variant="primary"
           startIcon={<Download size={18} />}
           onClick={() => setIsModalOpen(true)}
         >
           Importer des Codes
-        </Button>
+        </Button> */}
       </div>
 
       <GenericTable

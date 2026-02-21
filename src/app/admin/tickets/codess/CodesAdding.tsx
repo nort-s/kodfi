@@ -12,7 +12,7 @@ export default function CodesAdding({ }: CodesAddingProps) {
                 Importer
             </Button>
             <Button size="md" variant="primary" startIcon={<Plus size={18}/>}>
-                Ajouter Hotspot
+                Ajouter Wifizone
             </Button>
         </div>
     )

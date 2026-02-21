@@ -43,7 +43,7 @@ export default function ImportCodesModal({ isOpen, onClose, hotspots, offers }: 
   };
 
   return (
-    <Modal title="Importer du Stock (Tickets)" isOpen={isOpen} onClose={onClose}>
+    <Modal title="Importer du Stock (Tickets)" isOpen={isOpen} onClose={onClose} className="max-w-[700px] p-6 lg:p-10">
       <form action={handleSubmit} className="space-y-5 mt-4">
         
         {/* ÉTAPE 1 : CHOISIR LE LIEU */}
@@ -79,7 +79,7 @@ export default function ImportCodesModal({ isOpen, onClose, hotspots, offers }: 
             <option value="">-- Choisir un tarif --</option>
             {filteredOffers.map(offer => (
                 <option key={offer.id} value={offer.id}>
-                    {offer.name} ({offer.price} FCFA - {offer.duration} min)
+                    {offer.name} ({offer.price} FCFA - {offer.duration} {offer.unit})
                 </option>
             ))}
           </select>

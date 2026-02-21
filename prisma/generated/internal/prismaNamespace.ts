@@ -1645,6 +1645,7 @@ export const HotspotScalarFieldEnum = {
   location: 'location',
   redirectUrl: 'redirectUrl',
   state: 'state',
+  secretKey: 'secretKey',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -1717,9 +1718,12 @@ export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeo
 export const LogAccessScalarFieldEnum = {
   id: 'id',
   hotspotId: 'hotspotId',
+  macAddress: 'macAddress',
+  ipAddress: 'ipAddress',
+  details: 'details',
   phone: 'phone',
   codeId: 'codeId',
-  event: 'event',
+  action: 'action',
   meta: 'meta',
   createdAt: 'createdAt'
 } as const

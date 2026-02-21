@@ -72,7 +72,7 @@ export default function HotspotForm({ onSuccess, initialData }: HotspotFormProps
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Nom */}
             <div>
-                <Label>Nom du Hotspot <span className="text-red-500">*</span></Label>
+                <Label>Nom du Wifizone <span className="text-red-500">*</span></Label>
                 <Input
                     placeholder="Ex: Wifi Restaurant"
                     {...register("name")}

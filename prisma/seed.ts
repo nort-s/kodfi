@@ -20,7 +20,7 @@ async function main() {
 
   // 1. ADMIN
   const passwordHash = await hash('admin123', 12)
-  const adminEmail = "admin@kodfi.com" 
+  const adminEmail = "barnororderic@gmail.com" 
 
   const admin = await prisma.user.upsert({
     where: { email: adminEmail },

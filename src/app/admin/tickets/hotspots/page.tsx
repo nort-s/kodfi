@@ -35,7 +35,7 @@ export default async function HotspotsPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <PageBreadcrumb pageTitle="Hotspots" parentNode="Tickets" />
+        <PageBreadcrumb pageTitle="Wifizone" parentNode="Tickets" />
       </div>
 
       <Hotspot hotspots={hotspots}/>

@@ -53,7 +53,7 @@ export async function PATCH(
         });
 
         if (!existingHotspot) {
-            return NextResponse.json({ message: "Hotspot introuvable" }, { status: 404 });
+            return NextResponse.json({ message: "Wifizone introuvable" }, { status: 404 });
         }
 
         // Sécurité : Seul le propriétaire peut modifier
@@ -113,7 +113,7 @@ export async function DELETE(
         });
 
         if (!existingHotspot) {
-            return NextResponse.json({ message: "Hotspot introuvable" }, { status: 404 });
+            return NextResponse.json({ message: "Wifizone introuvable" }, { status: 404 });
         }
 
         if (existingHotspot.ownerId !== currentUser.id) {

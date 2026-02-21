@@ -18,7 +18,7 @@ export default function HotspotAdding({ onCreate }: HotspotAddingProps) {
           startIcon={<Plus size={18} />}
           onClick={onCreate}
         >
-          Ajouter Hotspot
+          Ajouter Wifizone
         </Button>
       </div>
     </>

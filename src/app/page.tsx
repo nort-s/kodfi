@@ -1,12 +1,44 @@
+"use client";
+
 import Link from "next/link";
-import {
-  Wifi, Smartphone, TrendingUp, ShieldCheck,
-  CheckCircle, XCircle, HelpCircle, ArrowRight,
-  BarChart3, Users, Zap
-} from "lucide-react";
+
+import { motion } from "framer-motion";
+
+import { Wifi, Smartphone, TrendingUp, ShieldCheck, CheckCircle, XCircle, HelpCircle, ArrowRight, BarChart3, Users, Zap, Settings, DollarSign, Activity, Phone } from "lucide-react";
 import Button from "@/components/ui/button/Button";
+import { Tabs, Tab } from "@/components/landing/tabs/Tabs";
+import KodfiInAction from "@/components/landing/KodfiInAction";
+import { useState } from "react";
+
+
 
 export default function LandingPage() {
+  const [dailySales, setDailySales] = useState(145);
+  const avgTicket = 200
+  const monthlyRevenue = dailySales * 30 * 200 * 0.9;
+
+  function FAQItem({ question, answer }: { question: string, answer: React.ReactNode }) {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300 hover:border-brand-300">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full p-6 flex justify-between items-center text-left"
+        >
+          <span className="font-bold text-lg text-gray-900">{question}</span>
+          <div className={`p-2 rounded-full bg-gray-50 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-brand-50 text-brand-600' : ''}`}>
+            <HelpCircle size={20} />
+          </div>
+        </button>
+        <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="p-6 pt-0 text-gray-600 border-t border-gray-50 leading-relaxed">
+            {answer}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-brand-100 selection:text-brand-900">
 
@@ -42,142 +74,166 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION (Impact Majeur) */}
-      <section className="pt-32 pb-20 lg:pt-36 lg:pb-32 overflow-hidden bg-gradient-to-b from-gray-50 to-white relative">
-        <div className="absolute top-20 right-0 -mr-20 opacity-10">
-          <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            className="lucide lucide-wifi">
-            <path d="M12 20h.01"></path>
-            <path d="M2 8.82a15 15 0 0 1 20 0"></path>
-            <path d="M5 12.859a10 10 0 0 1 14 0"></path>
-            <path d="M8.5 16.429a5 5 0 0 1 7 0"></path>
-          </svg>
+      {/* 2.  HERO SECTION 2.0 */}
+      <section className="relative pt-20 pb-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* <div className="flex-1 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold mb-6 border border-brand-100 uppercase tracking-widest">
+                🚀 L'unique solution automatisée au Bénin
+              </div>
+              <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-6">
+                Votre WiFi devient une <span className="text-brand-600">banque.</span>
+              </h1>
+              <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Kodfi transforme votre routeur MikroTik en un automate de vente 24h/24.
+                Encaissez via MoMo & Flooz sans bouger de votre canapé.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button size="md" className="rounded-full px-8 shadow-2xl shadow-brand-500/20">
+                  Démarrer gratuitement
+                </Button>
+                <div className="flex items-center gap-3 px-4 py-2 bg-slate-100 rounded-full text-sm font-medium text-slate-600">
+                  <div className="flex -space-x-2">
+                    <div className="w-6 h-6 rounded-full border-2 border-white bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold">
+                      KF
+                    </div>
+                    {[1, 2, 3].map(i => <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-slate-300" />)}
+                  </div>
+                  +450 gérants nous font confiance
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-amber-900 bg-amber-50 px-4 py-2 rounded-full border border-amber-200">
+  ⚡ 127 gérants ont créé leur compte cette semaine
+</div>
+            </div> */}
+            <div className="flex-1 text-left">
+              {/* Badge avec urgence */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold border border-brand-100">
+                  🚀 L'unique solution automatisée au Bénin
+                </div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-900 text-xs font-bold border border-amber-200 uppercase tracking-widest">
+                  🔥 Installation -60% : 2000 FCFA au lieu de 5000 FCFA
+                </div>
+              </div>
+
+              <p className="text-sm text-slate-600 mb-6 flex items-center gap-2">
+                ⏰ <span className="font-semibold text-amber-900">Plus que 23 places</span>
+                à ce tarif pour les early adopters
+              </p>
+
+              <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-6">
+                Votre WiFi devient une <span className="text-brand-600">banque.</span>
+              </h1>
+
+              <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
+                Kodfi transforme votre routeur MikroTik en un automate de vente 24h/24.
+                <strong>Encaissez</strong> via MoMo & Flooz sans bouger de votre canapé.
+              </p>
+
+              {/* Témoignage court */}
+              <div className="bg-slate-50 border-l-4 border-brand-600 p-4 mb-6 rounded-r-lg">
+                <p className="text-sm italic text-slate-700">
+                  "Je dors tranquille, Kodfi vend mes forfaits même à 3h du matin"
+                </p>
+                <p className="text-xs text-slate-500 mt-2">— Nicanor B., Gérant WiFi Zone à Abomey-Calavi</p>
+              </div>
+            </div>
+
+            {/* LE SIMULATEUR (Côté droit) */}
+            <div className="flex-1 w-full max-w-md bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl relative">
+              <div className="absolute -top-6 -left-6 bg-brand-600 text-white p-4 rounded-2xl shadow-lg">
+                <TrendingUp size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-6">Simulateur de revenus</h3>
+              <div className="space-y-6">
+                <div>
+                  <label className="text-sm text-slate-500 block mb-2">Ventes par jour (estimé)</label>
+                  <input
+                    type="range"
+                    value={dailySales}
+                    onChange={(e) => setDailySales(Number(e.target.value))}
+                    min="10"
+                    max="500"
+                    className="w-full accent-brand-600"
+                  />
+
+                </div>
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <span className="text-slate-500 text-sm">Gain mensuel potentiel</span>
+                  <div className="text-3xl font-black text-brand-600">
+                    {monthlyRevenue.toLocaleString('fr-FR')} FCFA
+                  </div>
+                  <p className="text-xs text-emerald-600 font-semibold mt-1">
+                    ✓ Montant net que vous recevez (90% garanti)
+                  </p>
+                </div>
+                <p className="text-[10px] text-slate-400 text-center italic">Basé sur {dailySales} ventes/jour × {avgTicket}FCFA</p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-
-          {/* <!-- Badge --> */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm text-brand-700 text-sm font-bold mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-600"></span>
-            </span>
-            Nouveau au Bénin : le Wi-Fi qui vend tout seul
-          </div>
-
-          {/* <!-- Titre --> */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-gray-900 mb-8 leading-tight">
-            Vendez vos codes Wi-Fi
-            <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">
-                même quand vous dormez
-              </span>
-          </h1>
-
-          {/* <!-- Description --> */}
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Kodfi permet aux propriétaires de WiFi Zone de vendre des codes Wi-Fi automatiquement via Mobile Money.
-            <br className="hidden sm:block"/>
-            Plus besoin de tickets papier, de monnaie ou d’être présent toute la journée.
-            Tout se gère depuis votre téléphone.
-          </p>
-
-          {/* <!-- CTA --> */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a className="w-full sm:w-auto" href="/signup">
-              <button
-                className="w-full px-8 py-4 bg-brand-600 text-white rounded-xl font-bold text-lg hover:bg-brand-700 transition shadow-xl shadow-brand-200 flex items-center justify-center gap-2">
-                Commencer gratuitement
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  className="lucide lucide-arrow-right">
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
-              </button>
-            </a>
-
-            <a className="w-full sm:w-auto" href="#how-it-works">
-              <button
-                className="w-full px-8 py-4 bg-white text-gray-700 border border-gray-200 rounded-xl font-bold text-lg hover:bg-gray-50 transition">
-                Voir la démo
-              </button>
-            </a>
-          </div>
-
-          {/* <!-- Trust --> */}
-          <div className="mt-12 flex items-center justify-center gap-8 text-gray-400 grayscale opacity-70">
-            <span className="font-bold text-xl">MTN MoMo</span>
-            <span className="font-bold text-xl">Moov Money</span>
-            <span className="font-bold text-xl">MikroTik</span>
-          </div>
-
-        </div>
       </section>
 
 
       {/* 3. LE COMPARATIF (Douleur vs Solution) */}
-      <section className="py-20 bg-white">
+      {/* SECTION COMPARATIVE RADICALE */}
+      <section className="py-24 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Pourquoi changer ?</h2>
-            <p className="text-gray-500 mt-2">La méthode traditionnelle vous fait perdre de l'argent.</p>
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Pourquoi Kodfi est indétrônable ?
+            </h2>
+            <p className="text-slate-400 text-lg">
+              Plus qu'un simple widget, une infrastructure de niveau bancaire.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* AVANT (La Galère) */}
-            <div className="bg-red-50 p-8 rounded-3xl border border-red-100">
-              <h3 className="text-xl font-bold text-red-800 mb-6 flex items-center gap-2">
-                <XCircle className="text-red-600" /> Gestion Manuelle
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3 text-red-700">
-                  <XCircle size={20} className="mt-0.5 shrink-0 opacity-70" />
-                  Impression coûteuse des tickets papiers.
-                </li>
-                <li className="flex items-start gap-3 text-red-700">
-                  <XCircle size={20} className="mt-0.5 shrink-0 opacity-70" />
-                  Problèmes de monnaie constants (les pièces de 100F manquent).
-                </li>
-                <li className="flex items-start gap-3 text-red-700">
-                  <XCircle size={20} className="mt-0.5 shrink-0 opacity-70" />
-                  Comptabilité difficile (cahiers, erreurs, vols).
-                </li>
-                <li className="flex items-start gap-3 text-red-700">
-                  <XCircle size={20} className="mt-0.5 shrink-0 opacity-70" />
-                  Vous devez être présent physiquement pour vendre.
-                </li>
-              </ul>
+          {/* Grid 2×2 au lieu de 1×4 */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {/* Box 1: Automatisation */}
+            <div className="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-brand-500 transition-colors group">
+              <Zap className="text-brand-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-xl font-bold mb-4">Zéro Gestion de Stock</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Contrairement aux autres, Kodfi pilote votre MikroTik. Le système crée
+                lui-même les codes quand le stock baisse. Vous ne touchez plus à Winbox.
+              </p>
             </div>
 
-            {/* APRÈS (Kodfi) */}
-            <div className="bg-brand-50 p-8 rounded-3xl border border-brand-100 shadow-lg relative">
-              <div className="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                Recommandé
-              </div>
-              <h3 className="text-xl font-bold text-brand-800 mb-6 flex items-center gap-2">
-                <CheckCircle className="text-brand-600" /> Avec Kodfi
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3 text-brand-900">
-                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-brand-600" />
-                  0 papier, 0 impression. Tout est numérique.
-                </li>
-                <li className="flex items-start gap-3 text-brand-900">
-                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-brand-600" />
-                  Paiement exact par MoMo. Plus de soucis de monnaie.
-                </li>
-                <li className="flex items-start gap-3 text-brand-900">
-                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-brand-600" />
-                  Traçabilité totale : vous savez qui achète et quand.
-                </li>
-                <li className="flex items-start gap-3 text-brand-900">
-                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-brand-600" />
-                  Vendez 24h/24, même quand vous n'êtes pas là.
-                </li>
-              </ul>
+            {/* Box 2: ARCEP */}
+            <div className="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-emerald-500 transition-colors group">
+              <ShieldCheck className="text-emerald-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-xl font-bold mb-4">Bouclier Légal ARCEP</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Chaque connexion enregistre l'adresse MAC et le numéro de téléphone.
+                En cas d'incident, vous fournissez les preuves en 1 clic. Dormez l'esprit tranquille.
+              </p>
+            </div>
+
+            {/* Box 3: UX */}
+            <div className="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-blue-500 transition-colors group">
+              <Smartphone className="text-blue-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-xl font-bold mb-4">Expérience "Sans Couture"</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Pas de redirection lente vers un autre site. Le paiement se fait sur votre
+                portail. Le client valide son code secret et il est connecté automatiquement.
+              </p>
+            </div>
+
+            {/* Box 4: Pricing */}
+            <div className="bg-slate-800/50 p-8 rounded-3xl border border-slate-700 hover:border-green-500 transition-colors group">
+              <DollarSign className="text-green-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+              <h3 className="text-xl font-bold mb-4">Pricing Transparent</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                10% de commission, point final. Pas de frais cachés, pas de surprise.
+                Tous les frais techniques sont à notre charge. Vous recevez toujours
+                exactement 90% de vos ventes.
+              </p>
             </div>
           </div>
         </div>
@@ -188,7 +244,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900">Simple comme bonjour</h2>
-            <p className="text-gray-500 mt-2">Installation en 5 minutes chrono.</p>
+            <p className="text-gray-500 mt-2">Installation en 15 minutes chrono.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
@@ -196,108 +252,153 @@ export default function LandingPage() {
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-200 -z-10"></div>
 
             {/* Step 1 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-sm text-center hover:shadow-lg transition">
               <div className="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg shadow-blue-200">
                 1
               </div>
-              <h3 className="text-lg font-bold mb-3">Créez votre Boutique</h3>
-              <p className="text-gray-500 text-sm">Inscrivez-vous sur Kodfi et configurez vos tarifs (ex: 1H = 100F, Jour = 500F).</p>
+              <h3 className="text-lg font-bold mb-3">Créez vos offres</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Inscrivez-vous sur Kodfi et configurez vos tarifs directement sur la plateforme
+                (ex: 1H = 100F, Jour = 500F, Semaine = 1000F). Kodfi génère automatiquement
+                les codes sur votre MikroTik.
+              </p>
             </div>
 
             {/* Step 2 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-sm text-center hover:shadow-lg transition">
               <div className="w-16 h-16 bg-brand-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg shadow-brand-200">
                 2
               </div>
-              <h3 className="text-lg font-bold mb-3">Importez vos Codes</h3>
-              <p className="text-gray-500 text-sm">Copiez vos tickets depuis Mikrotik User Manager et collez-les dans Kodfi. Ils sont sécurisés.</p>
+              <h3 className="text-lg font-bold mb-3">Installez le script</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Téléchargez le script Kodfi et ajoutez-le à votre MikroTik.
+                Puis intégrez le widget de paiement sur votre portail captif en copiant
+                1 ligne de code. Tout est automatisé !
+              </p>
             </div>
 
             {/* Step 3 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-sm text-center hover:shadow-lg transition">
               <div className="w-16 h-16 bg-green-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg shadow-green-200">
                 3
               </div>
-              <h3 className="text-lg font-bold mb-3">Partagez le lien</h3>
-              <p className="text-gray-500 text-sm">Affichez votre QR Code ou envoyez le lien sur WhatsApp. Les clients paient, vous encaissez.</p>
+              <h3 className="text-lg font-bold mb-3">Vos clients paient, vous encaissez</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Vos clients se connectent au WiFi, paient par MoMo/Flooz directement
+                sur votre portail, et reçoivent leur code instantanément.
+                Vous recevez 90% de chaque vente. 24h/24, sans intervention.
+              </p>
+            </div>
+          </div>
+
+          {/* Bonus : Visual flow pour desktop */}
+          <div className="mt-16 hidden lg:block">
+            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-200">
+              <h3 className="text-center font-bold text-xl text-gray-900 mb-8">
+                Le parcours de votre client (en 30 secondes)
+              </h3>
+
+              <div className="flex items-center justify-between gap-4">
+                {/* Étape 1 */}
+                <div className="flex-1 text-center">
+                  <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Wifi size={24} className="text-brand-600" />
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900">Se connecte au WiFi</p>
+                  <p className="text-xs text-gray-500 mt-1">Portail captif s'affiche</p>
+                </div>
+
+                <ArrowRight className="text-gray-300 flex-shrink-0" size={24} />
+
+                {/* Étape 2 */}
+                <div className="flex-1 text-center">
+                  <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <DollarSign size={24} className="text-green-600" />
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900">Choisit son forfait</p>
+                  <p className="text-xs text-gray-500 mt-1">1H, Jour, Semaine...</p>
+                </div>
+
+                <ArrowRight className="text-gray-300 flex-shrink-0" size={24} />
+
+                {/* Étape 3 */}
+                <div className="flex-1 text-center">
+                  <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Smartphone size={24} className="text-blue-600" />
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900">Paie par MoMo/Flooz</p>
+                  <p className="text-xs text-gray-500 mt-1">Paiement sécurisé</p>
+                </div>
+
+                <ArrowRight className="text-gray-300 flex-shrink-0" size={24} />
+
+                {/* Étape 4 */}
+                <div className="flex-1 text-center">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle size={24} className="text-emerald-600" />
+                  </div>
+                  <p className="text-sm font-semibold text-gray-900">Reçoit son code</p>
+                  <p className="text-xs text-gray-500 mt-1">Connexion automatique</p>
+                </div>
+              </div>
+
+              <div className="mt-8 bg-brand-50 p-4 rounded-lg border border-brand-200 text-center">
+                <p className="text-sm text-brand-900">
+                  <strong>⚡ Temps total : moins de 30 secondes</strong> •
+                  Aucune intervention de votre part
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 5. FONCTIONNALITÉS CLÉS */}
-      <section id="features" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Tout pour gérer votre réseau</h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="flex flex-col gap-4">
-              <div className="bg-orange-50 w-12 h-12 rounded-lg flex items-center justify-center text-orange-600">
-                <Users size={24} />
-              </div>
-              <h3 className="text-xl font-bold">CRM Clients (WhatsApp)</h3>
-              <p className="text-gray-500 leading-relaxed">
-                Chaque client qui achète est enregistré. Vous avez son numéro pour le relancer sur WhatsApp avec des promos.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="bg-indigo-50 w-12 h-12 rounded-lg flex items-center justify-center text-indigo-600">
-                <BarChart3 size={24} />
-              </div>
-              <h3 className="text-xl font-bold">Comptabilité Temps Réel</h3>
-              <p className="text-gray-500 leading-relaxed">
-                Sachez exactement combien vous avez gagné aujourd'hui. Fini les calculs à la main le soir.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="bg-green-50 w-12 h-12 rounded-lg flex items-center justify-center text-green-600">
-                <Zap size={24} />
-              </div>
-              <h3 className="text-xl font-bold">Livraison Instantanée</h3>
-              <p className="text-gray-500 leading-relaxed">
-                Le système fonctionne 24h/24. Vous pouvez dormir, vos clients continuent d'acheter des forfaits.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <KodfiInAction />
 
       {/* 6. FAQ (Confiance) */}
-      <section id="faq" className="py-20 bg-gray-50">
+      <section id="faq" className="py-24 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Questions Fréquentes</h2>
+            <h2 className="text-4xl font-black text-gray-900 mb-4">Des questions ?</h2>
+            <p className="text-gray-600">Tout ce que vous devez savoir pour lancer votre business.</p>
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h4 className="font-bold text-lg mb-2 flex items-center gap-2">
-                <HelpCircle size={18} className="text-brand-500" />
-                Est-ce que ça marche avec Mikrotik ?
-              </h4>
-              <p className="text-gray-600">Oui, absolument. Vous générez vos tickets sur Mikrotik comme d'habitude (via User Manager ou Terminal), et vous importez simplement la liste des codes dans Kodfi.</p>
-            </div>
+          <div className="space-y-4 mb-20">
+            <FAQItem
+              question="Est-ce compatible avec mon MikroTik ?"
+              answer={<p>Oui, 100% compatible avec <strong>RouterOS v6 et v7</strong>. Kodfi automatise la création de codes et la gestion des stocks. Vous ne touchez plus à Winbox.</p>}
+            />
+            <FAQItem
+              question="Comment je reçois mon argent ?"
+              answer={<p>L'argent est collecté via FedaPay et stocké sur votre compte Kodfi. Vous pouvez retirer vos fonds <strong>instantanément vers votre numéro MoMo ou Flooz</strong> dès que vous atteignez 5 000 FCFA.</p>}
+            />
+            <FAQItem
+              question="Quels sont les frais ?"
+              answer={<p>Kodfi prélève une commission unique de <strong>10% par vente</strong>. Cela couvre les frais de transaction MoMo, la maintenance du serveur et le support technique. Pas de vente = 0 frais.</p>}
+            />
+          </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h4 className="font-bold text-lg mb-2 flex items-center gap-2">
-                <HelpCircle size={18} className="text-brand-500" />
-                Comment je reçois mon argent ?
-              </h4>
-              <p className="text-gray-600">Les paiements des clients arrivent sur votre compte marchand (Fedapay/Kkiapay) et vous pouvez retirer les fonds vers votre numéro MoMo personnel quand vous voulez.</p>
+          {/* BLOC CONTACT PRÉCIS */}
+          <div className="bg-white rounded-[2rem] p-8 md:p-12 border border-gray-200 shadow-xl text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-5">
+              <Smartphone size={120} />
             </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h4 className="font-bold text-lg mb-2 flex items-center gap-2">
-                <HelpCircle size={18} className="text-brand-500" />
-                Combien ça coûte ?
-              </h4>
-              <p className="text-gray-600">L'inscription est gratuite. Kodfi prend une petite commission uniquement sur les tickets vendus. Si vous ne vendez rien, vous ne payez rien.</p>
+            <h3 className="text-2xl font-bold mb-4">Besoin d'une démo ou d'aide ?</h3>
+            <p className="text-gray-600 mb-8 max-w-lg mx-auto">
+              Notre équipe technique au Bénin vous accompagne gratuitement pour votre première installation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="https://wa.me/22966325353" className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-lg shadow-green-200">
+                <Phone size={20} /> WhatsApp Support
+              </a>
+              <a href="mailto:contact@kodfi.bj" className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-lg">
+                <HelpCircle size={20} /> Email Express
+              </a>
             </div>
           </div>
+
         </div>
       </section>
 

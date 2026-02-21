@@ -1,4 +1,4 @@
-import { PrismaClient, Role, Hotspot, Offer, Code, Order, EndUser } from '../../prisma/generated/client'
+import { PrismaClient, Role, Hotspot, Offer, Code, Order, EndUser, DurationUnit, LogEvent } from '../../prisma/generated/client'
 import { Pool } from 'pg'
 import { PrismaPg } from '@prisma/adapter-pg'
 
@@ -15,6 +15,6 @@ export const prisma = globalForPrisma.prisma || new PrismaClient({ adapter })
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
-export { Role };
-export { type Hotspot, type Offer, type Code, type Order, type EndUser };
+export { Role, LogEvent };
+export { type Hotspot, type Offer, type Code, type Order, type EndUser, type DurationUnit };
 export { PrismaClient };

@@ -10,6 +10,14 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  title: "Kodfi - Automatisez votre WiFi Zone au Bénin | Vente de forfaits 24h/24",
+  description: "Transformez votre routeur MikroTik en automate de vente. Encaissez via MoMo & Flooz sans intervention. 450+ gérants nous font confiance.",
+  openGraph: {
+    images: ['/og-image.png'], // TODO: Créer une image 1200x630
+  }
+}
+
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">

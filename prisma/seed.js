@@ -21,7 +21,7 @@ async function main() {
 
   // 1. ADMIN
   const passwordHash = await hash('admin123', 12);
-  const adminEmail = "admin@kodfi.com"; 
+  const adminEmail = "barnororderic@gmail.com"; 
 
   const admin = await prisma.user.upsert({
     where: { email: adminEmail },
@@ -29,7 +29,7 @@ async function main() {
     create: {
       email: adminEmail,
       password: passwordHash,
-      phone: "99999999", // Numéro fictif
+      phone: "0166325353", // Numéro fictif
     },
   });
   console.log(`👤 Admin prêt : ${admin.email}`);

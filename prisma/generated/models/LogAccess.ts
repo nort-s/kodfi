@@ -27,27 +27,36 @@ export type AggregateLogAccess = {
 export type LogAccessMinAggregateOutputType = {
   id: string | null
   hotspotId: string | null
+  macAddress: string | null
+  ipAddress: string | null
+  details: string | null
   phone: string | null
   codeId: string | null
-  event: $Enums.LogEvent | null
+  action: $Enums.LogEvent | null
   createdAt: Date | null
 }
 
 export type LogAccessMaxAggregateOutputType = {
   id: string | null
   hotspotId: string | null
+  macAddress: string | null
+  ipAddress: string | null
+  details: string | null
   phone: string | null
   codeId: string | null
-  event: $Enums.LogEvent | null
+  action: $Enums.LogEvent | null
   createdAt: Date | null
 }
 
 export type LogAccessCountAggregateOutputType = {
   id: number
   hotspotId: number
+  macAddress: number
+  ipAddress: number
+  details: number
   phone: number
   codeId: number
-  event: number
+  action: number
   meta: number
   createdAt: number
   _all: number
@@ -57,27 +66,36 @@ export type LogAccessCountAggregateOutputType = {
 export type LogAccessMinAggregateInputType = {
   id?: true
   hotspotId?: true
+  macAddress?: true
+  ipAddress?: true
+  details?: true
   phone?: true
   codeId?: true
-  event?: true
+  action?: true
   createdAt?: true
 }
 
 export type LogAccessMaxAggregateInputType = {
   id?: true
   hotspotId?: true
+  macAddress?: true
+  ipAddress?: true
+  details?: true
   phone?: true
   codeId?: true
-  event?: true
+  action?: true
   createdAt?: true
 }
 
 export type LogAccessCountAggregateInputType = {
   id?: true
   hotspotId?: true
+  macAddress?: true
+  ipAddress?: true
+  details?: true
   phone?: true
   codeId?: true
-  event?: true
+  action?: true
   meta?: true
   createdAt?: true
   _all?: true
@@ -158,9 +176,12 @@ export type LogAccessGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type LogAccessGroupByOutputType = {
   id: string
   hotspotId: string
+  macAddress: string | null
+  ipAddress: string | null
+  details: string | null
   phone: string | null
   codeId: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta: runtime.JsonValue | null
   createdAt: Date
   _count: LogAccessCountAggregateOutputType | null
@@ -189,9 +210,12 @@ export type LogAccessWhereInput = {
   NOT?: Prisma.LogAccessWhereInput | Prisma.LogAccessWhereInput[]
   id?: Prisma.StringFilter<"LogAccess"> | string
   hotspotId?: Prisma.StringFilter<"LogAccess"> | string
+  macAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  ipAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  details?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   phone?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   codeId?: Prisma.StringNullableFilter<"LogAccess"> | string | null
-  event?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
   meta?: Prisma.JsonNullableFilter<"LogAccess">
   createdAt?: Prisma.DateTimeFilter<"LogAccess"> | Date | string
   Hotspot?: Prisma.XOR<Prisma.HotspotScalarRelationFilter, Prisma.HotspotWhereInput>
@@ -201,9 +225,12 @@ export type LogAccessWhereInput = {
 export type LogAccessOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   hotspotId?: Prisma.SortOrder
+  macAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  details?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   codeId?: Prisma.SortOrderInput | Prisma.SortOrder
-  event?: Prisma.SortOrder
+  action?: Prisma.SortOrder
   meta?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Hotspot?: Prisma.HotspotOrderByWithRelationInput
@@ -216,9 +243,12 @@ export type LogAccessWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LogAccessWhereInput[]
   NOT?: Prisma.LogAccessWhereInput | Prisma.LogAccessWhereInput[]
   hotspotId?: Prisma.StringFilter<"LogAccess"> | string
+  macAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  ipAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  details?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   phone?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   codeId?: Prisma.StringNullableFilter<"LogAccess"> | string | null
-  event?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
   meta?: Prisma.JsonNullableFilter<"LogAccess">
   createdAt?: Prisma.DateTimeFilter<"LogAccess"> | Date | string
   Hotspot?: Prisma.XOR<Prisma.HotspotScalarRelationFilter, Prisma.HotspotWhereInput>
@@ -228,9 +258,12 @@ export type LogAccessWhereUniqueInput = Prisma.AtLeast<{
 export type LogAccessOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   hotspotId?: Prisma.SortOrder
+  macAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  details?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   codeId?: Prisma.SortOrderInput | Prisma.SortOrder
-  event?: Prisma.SortOrder
+  action?: Prisma.SortOrder
   meta?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.LogAccessCountOrderByAggregateInput
@@ -244,17 +277,23 @@ export type LogAccessScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LogAccessScalarWhereWithAggregatesInput | Prisma.LogAccessScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"LogAccess"> | string
   hotspotId?: Prisma.StringWithAggregatesFilter<"LogAccess"> | string
+  macAddress?: Prisma.StringNullableWithAggregatesFilter<"LogAccess"> | string | null
+  ipAddress?: Prisma.StringNullableWithAggregatesFilter<"LogAccess"> | string | null
+  details?: Prisma.StringNullableWithAggregatesFilter<"LogAccess"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"LogAccess"> | string | null
   codeId?: Prisma.StringNullableWithAggregatesFilter<"LogAccess"> | string | null
-  event?: Prisma.EnumLogEventWithAggregatesFilter<"LogAccess"> | $Enums.LogEvent
+  action?: Prisma.EnumLogEventWithAggregatesFilter<"LogAccess"> | $Enums.LogEvent
   meta?: Prisma.JsonNullableWithAggregatesFilter<"LogAccess">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LogAccess"> | Date | string
 }
 
 export type LogAccessCreateInput = {
   id?: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   Hotspot: Prisma.HotspotCreateNestedOneWithoutLogAccessInput
@@ -264,17 +303,23 @@ export type LogAccessCreateInput = {
 export type LogAccessUncheckedCreateInput = {
   id?: string
   hotspotId: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
   codeId?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
 export type LogAccessUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Hotspot?: Prisma.HotspotUpdateOneRequiredWithoutLogAccessNestedInput
@@ -284,9 +329,12 @@ export type LogAccessUpdateInput = {
 export type LogAccessUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -294,17 +342,23 @@ export type LogAccessUncheckedUpdateInput = {
 export type LogAccessCreateManyInput = {
   id?: string
   hotspotId: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
   codeId?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
 export type LogAccessUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -312,9 +366,12 @@ export type LogAccessUpdateManyMutationInput = {
 export type LogAccessUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -332,9 +389,12 @@ export type LogAccessOrderByRelationAggregateInput = {
 export type LogAccessCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hotspotId?: Prisma.SortOrder
+  macAddress?: Prisma.SortOrder
+  ipAddress?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   codeId?: Prisma.SortOrder
-  event?: Prisma.SortOrder
+  action?: Prisma.SortOrder
   meta?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -342,18 +402,24 @@ export type LogAccessCountOrderByAggregateInput = {
 export type LogAccessMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hotspotId?: Prisma.SortOrder
+  macAddress?: Prisma.SortOrder
+  ipAddress?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   codeId?: Prisma.SortOrder
-  event?: Prisma.SortOrder
+  action?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type LogAccessMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   hotspotId?: Prisma.SortOrder
+  macAddress?: Prisma.SortOrder
+  ipAddress?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   codeId?: Prisma.SortOrder
-  event?: Prisma.SortOrder
+  action?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -447,8 +513,11 @@ export type EnumLogEventFieldUpdateOperationsInput = {
 
 export type LogAccessCreateWithoutHotspotInput = {
   id?: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   Code?: Prisma.CodeCreateNestedOneWithoutLogAccessInput
@@ -456,9 +525,12 @@ export type LogAccessCreateWithoutHotspotInput = {
 
 export type LogAccessUncheckedCreateWithoutHotspotInput = {
   id?: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
   codeId?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
@@ -495,17 +567,23 @@ export type LogAccessScalarWhereInput = {
   NOT?: Prisma.LogAccessScalarWhereInput | Prisma.LogAccessScalarWhereInput[]
   id?: Prisma.StringFilter<"LogAccess"> | string
   hotspotId?: Prisma.StringFilter<"LogAccess"> | string
+  macAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  ipAddress?: Prisma.StringNullableFilter<"LogAccess"> | string | null
+  details?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   phone?: Prisma.StringNullableFilter<"LogAccess"> | string | null
   codeId?: Prisma.StringNullableFilter<"LogAccess"> | string | null
-  event?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFilter<"LogAccess"> | $Enums.LogEvent
   meta?: Prisma.JsonNullableFilter<"LogAccess">
   createdAt?: Prisma.DateTimeFilter<"LogAccess"> | Date | string
 }
 
 export type LogAccessCreateWithoutCodeInput = {
   id?: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   Hotspot: Prisma.HotspotCreateNestedOneWithoutLogAccessInput
@@ -514,8 +592,11 @@ export type LogAccessCreateWithoutCodeInput = {
 export type LogAccessUncheckedCreateWithoutCodeInput = {
   id?: string
   hotspotId: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
@@ -548,17 +629,23 @@ export type LogAccessUpdateManyWithWhereWithoutCodeInput = {
 
 export type LogAccessCreateManyHotspotInput = {
   id?: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
   codeId?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
 export type LogAccessUpdateWithoutHotspotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Code?: Prisma.CodeUpdateOneWithoutLogAccessNestedInput
@@ -566,18 +653,24 @@ export type LogAccessUpdateWithoutHotspotInput = {
 
 export type LogAccessUncheckedUpdateWithoutHotspotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LogAccessUncheckedUpdateManyWithoutHotspotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   codeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -585,16 +678,22 @@ export type LogAccessUncheckedUpdateManyWithoutHotspotInput = {
 export type LogAccessCreateManyCodeInput = {
   id?: string
   hotspotId: string
+  macAddress?: string | null
+  ipAddress?: string | null
+  details?: string | null
   phone?: string | null
-  event: $Enums.LogEvent
+  action: $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
 export type LogAccessUpdateWithoutCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Hotspot?: Prisma.HotspotUpdateOneRequiredWithoutLogAccessNestedInput
@@ -603,8 +702,11 @@ export type LogAccessUpdateWithoutCodeInput = {
 export type LogAccessUncheckedUpdateWithoutCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -612,8 +714,11 @@ export type LogAccessUncheckedUpdateWithoutCodeInput = {
 export type LogAccessUncheckedUpdateManyWithoutCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   hotspotId?: Prisma.StringFieldUpdateOperationsInput | string
+  macAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  event?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
+  action?: Prisma.EnumLogEventFieldUpdateOperationsInput | $Enums.LogEvent
   meta?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -623,9 +728,12 @@ export type LogAccessUncheckedUpdateManyWithoutCodeInput = {
 export type LogAccessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   hotspotId?: boolean
+  macAddress?: boolean
+  ipAddress?: boolean
+  details?: boolean
   phone?: boolean
   codeId?: boolean
-  event?: boolean
+  action?: boolean
   meta?: boolean
   createdAt?: boolean
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
@@ -635,9 +743,12 @@ export type LogAccessSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type LogAccessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   hotspotId?: boolean
+  macAddress?: boolean
+  ipAddress?: boolean
+  details?: boolean
   phone?: boolean
   codeId?: boolean
-  event?: boolean
+  action?: boolean
   meta?: boolean
   createdAt?: boolean
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
@@ -647,9 +758,12 @@ export type LogAccessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type LogAccessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   hotspotId?: boolean
+  macAddress?: boolean
+  ipAddress?: boolean
+  details?: boolean
   phone?: boolean
   codeId?: boolean
-  event?: boolean
+  action?: boolean
   meta?: boolean
   createdAt?: boolean
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
@@ -659,14 +773,17 @@ export type LogAccessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type LogAccessSelectScalar = {
   id?: boolean
   hotspotId?: boolean
+  macAddress?: boolean
+  ipAddress?: boolean
+  details?: boolean
   phone?: boolean
   codeId?: boolean
-  event?: boolean
+  action?: boolean
   meta?: boolean
   createdAt?: boolean
 }
 
-export type LogAccessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "hotspotId" | "phone" | "codeId" | "event" | "meta" | "createdAt", ExtArgs["result"]["logAccess"]>
+export type LogAccessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "hotspotId" | "macAddress" | "ipAddress" | "details" | "phone" | "codeId" | "action" | "meta" | "createdAt", ExtArgs["result"]["logAccess"]>
 export type LogAccessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Hotspot?: boolean | Prisma.HotspotDefaultArgs<ExtArgs>
   Code?: boolean | Prisma.LogAccess$CodeArgs<ExtArgs>
@@ -689,9 +806,12 @@ export type $LogAccessPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     hotspotId: string
+    macAddress: string | null
+    ipAddress: string | null
+    details: string | null
     phone: string | null
     codeId: string | null
-    event: $Enums.LogEvent
+    action: $Enums.LogEvent
     meta: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["logAccess"]>
@@ -1121,9 +1241,12 @@ export interface Prisma__LogAccessClient<T, Null = never, ExtArgs extends runtim
 export interface LogAccessFieldRefs {
   readonly id: Prisma.FieldRef<"LogAccess", 'String'>
   readonly hotspotId: Prisma.FieldRef<"LogAccess", 'String'>
+  readonly macAddress: Prisma.FieldRef<"LogAccess", 'String'>
+  readonly ipAddress: Prisma.FieldRef<"LogAccess", 'String'>
+  readonly details: Prisma.FieldRef<"LogAccess", 'String'>
   readonly phone: Prisma.FieldRef<"LogAccess", 'String'>
   readonly codeId: Prisma.FieldRef<"LogAccess", 'String'>
-  readonly event: Prisma.FieldRef<"LogAccess", 'LogEvent'>
+  readonly action: Prisma.FieldRef<"LogAccess", 'LogEvent'>
   readonly meta: Prisma.FieldRef<"LogAccess", 'Json'>
   readonly createdAt: Prisma.FieldRef<"LogAccess", 'DateTime'>
 }
